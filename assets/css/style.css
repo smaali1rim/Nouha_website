@@ -511,6 +511,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   letter-spacing: -0.035em;
 }
 .manifesto__line { display: block; position: relative; }
+.manifesto__small { font-size: 0.6em; letter-spacing: -0.02em; }
 .manifesto__line--intro {
   font-family: var(--font-editorial);
   font-style: italic;
