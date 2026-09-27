@@ -11,9 +11,8 @@
    (version "soft") prend le relais pour garder l'esprit rond et généreux. */
 @font-face {
   font-family: "TAN Meringue";
-  src: url("../fonts/TAN-Meringue.woff2") format("woff2"),
-       url("../fonts/TAN-Meringue.woff") format("woff");
-  font-weight: 400;
+  src: url("../fonts/TAN Meringue.woff2") format("woff2");
+  font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
