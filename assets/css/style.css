@@ -992,12 +992,12 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   border: 1.5px solid var(--ink);
   border-radius: var(--radius-lg);
   padding: clamp(28px, 3.4vw, 52px);
-  min-height: clamp(560px, 52vw, 760px);
+  min-height: clamp(420px, 38vw, 560px);
   transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), background 0.5s;
   isolation: isolate;
 }
-.offer--build { grid-column: 1 / span 6; grid-row: 1 / span 2; }
-.offer--grow { --offer-bg: var(--butter); grid-column: 7 / span 6; grid-row: 2 / span 2; margin-top: clamp(80px, 12vw, 200px); }
+.offer--build { grid-column: 1 / span 6; grid-row: 1 / span 2; align-self: start; }
+.offer--grow { --offer-bg: var(--butter); grid-column: 7 / span 6; grid-row: 1 / span 2; align-self: start; margin-top: clamp(48px, 7vw, 110px); }
 .offers__cta { grid-column: 1 / span 5; grid-row: 3; align-self: center; padding-right: 24px; }
 .offer:hover, .offer:focus-within {
   transform: translate(-6px, -6px);
@@ -1029,27 +1029,9 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   font-style: italic;
   font-size: clamp(1.1rem, 1.2vw, 1.4rem);
 }
-.offer__visual {
-  position: relative;
-  flex: 1;
-  min-height: 180px;
-  margin-block: 20px;
-}
-.offer__illus {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: min(78%, 420px);
-  height: 100%;
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.8s var(--ease);
-}
-.offer:hover .offer__illus { transform: rotate(-3deg) scale(1.04); }
 .offer__title {
+  margin-top: auto;
+  padding-top: clamp(32px, 4vw, 64px);
   font-family: var(--font-accent);
   font-weight: 700;
   font-synthesis: none;
@@ -2159,7 +2141,6 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   .offer { min-height: 0; }
   .offer--grow { margin-top: 0; margin-left: clamp(0px, 6vw, 60px); }
   .offer--build { margin-right: clamp(0px, 6vw, 60px); }
-  .offer__visual { min-height: 220px; }
   .offers__cta { order: 3; padding-right: 0; }
 
   .principles { display: flex; flex-direction: column; gap: 64px; }
