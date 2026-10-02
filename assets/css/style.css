@@ -357,7 +357,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   box-shadow: 0 6px 24px rgba(30, 59, 39, 0.08);
 }
 .burger:hover { transform: scale(1.06); background: var(--butter); }
-.burger__lines { position: relative; width: 22px; height: 10px; }
+.burger__lines { position: relative; width: 22px; height: 18px; }
 .burger__lines span {
   position: absolute;
   left: 0;
@@ -365,15 +365,17 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   height: 1.8px;
   border-radius: 2px;
   background: var(--ink);
-  transition: transform 0.5s var(--ease), top 0.3s var(--ease), background 0.3s;
+  transition: transform 0.5s var(--ease), top 0.3s var(--ease), background 0.3s, opacity 0.2s;
 }
 .burger__lines span:nth-child(1) { top: 0; }
 .burger__lines span:nth-child(2) { top: 8px; width: 70%; left: 30%; }
+.burger__lines span:nth-child(3) { top: 16px; }
 .burger:hover .burger__lines span:nth-child(2) { width: 100%; left: 0; }
 .menu-open .burger { background: var(--accent); border-color: var(--paper); }
 .menu-open .burger__lines span { background: var(--accent-ink); }
-.menu-open .burger__lines span:nth-child(1) { top: 4px; transform: rotate(45deg); }
-.menu-open .burger__lines span:nth-child(2) { top: 4px; left: 0; width: 100%; transform: rotate(-45deg); }
+.menu-open .burger__lines span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+.menu-open .burger__lines span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-open .burger__lines span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
 
 /* ---------- Menu plein écran ---------- */
 .menu {
@@ -1883,7 +1885,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   align-items: center;
 }
 .about-hero__photo { position: relative; max-width: 460px; justify-self: end; width: 100%; grid-column: auto; grid-row: auto; margin-top: 0; }
-.about-hero__grid .page-hero__title { font-size: clamp(3.2rem, 8vw, 8.5rem); }
+.about-hero__grid .page-hero__title { font-size: clamp(3.2rem, 8vw, 8.5rem); line-height: 1.15; }
 .about-hero__grid .page-hero__title .line--2 { padding-left: 0; }
 
 /* ==========================================================================
