@@ -67,41 +67,51 @@
   <main id="contenu">
 
     <!-- ============ Hero ============ -->
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero hero2" aria-labelledby="hero-title">
       <div class="container">
-        <h1 class="manifesto" id="hero-title">
-          <span class="manifesto__line manifesto__line--intro" data-reveal>Et si ta présence en ligne</span>
-          <span class="manifesto__line manifesto__line--2" data-reveal style="--delay:.08s">
-            <span class="manifesto__small">devenait</span>
-             <span class="inline-photo inline-photo--slideshow" aria-hidden="true">
-  <img src="assets/img/poster-1.png" alt="">
-  <img src="assets/img/poster-2.png" alt="">
-  <img src="assets/img/portrait.png" alt="">
-</span><span class="manifesto__small">un</span></span>
-          <span class="manifesto__line manifesto__line--3" data-reveal style="--delay:.07s"><span class="manifesto__small">vrai</span>
-           <span class="manifesto__small hero-media">
-            média
-              <!-- <svg class="doodle circle" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" vector-effect="non-scaling-stroke" d="M40 74C18 36 112 8 190 12s104 30 98 58c-6 32-90 48-160 44S8 92 14 62C20 38 84 20 158 22"/></svg>
-               <svg class="doodle hero__star float" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.2 5.8 11.4 12 12-6.2.6-11.4 5.8-12 12-.6-6.2-5.8-11.4-12-12C6.2 11.4 11.4 6.2 12 0z"/></svg>-->
-            </span></span>
-          <span class="manifesto__line manifesto__line--outro" data-reveal style="--delay:.24s">qui te ressemble — et qui travaille pour toi&nbsp;?</span>
-        </h1>
-
-        <div class="hero__bottom">
-          <p class="hero__intro" data-reveal style="--delay:.3s">
-            J'accompagne les indépendants et dirigeants à construire ou transformer leur présence en <strong>un média sur Substack</strong> qui renforce leur visibilité, leur autorité et leur activité.
+        <div class="hero2__stage">
+          <!-- Trait dessiné qui traverse la composition -->
+          <svg class="hero2__thread draw" data-reveal viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <path pathLength="1" vector-effect="non-scaling-stroke" d="M560 0C590 120 600 260 470 330C380 380 330 350 350 318C376 284 452 320 450 400C448 480 360 520 340 600C322 680 380 780 420 1000"/>
+          </svg>
+          <h1 class="hero2__title" id="hero-title">
+            <span class="hero2__row hero2__row--1" data-reveal>
+              <span>Deviens</span>
+              <span class="hero2__push">l'évidence
+                <span class="hero2__avatar inline-photo--slideshow" aria-hidden="true">
+                  <img src="assets/img/hero-avatar-1.jpg" alt="">
+                  <img src="assets/img/hero-avatar-2.jpg" alt="">
+                  <img src="assets/img/hero-avatar-3.jpg" alt="">
+                </span>
+              </span>
+            </span>
+            <span class="hero2__row hero2__row--2" data-reveal style="--delay:.08s">dans l'esprit</span>
+            <span class="hero2__row hero2__row--3" data-reveal style="--delay:.16s">des <em>bonnes</em></span>
+            <span class="hero2__row hero2__row--4" data-reveal style="--delay:.24s"><em>personnes.</em></span>
+          </h1>
+          <p class="hero2__aside" data-reveal style="--delay:.32s">
+            <span class="hero2__paren" aria-hidden="true">(</span>
+            <span class="hero2__aside-text">Construis une présence qui <strong>renforce ta crédibilité, te rend mémorable et génère des opportunités</strong>, sans devoir publier toujours plus ni dépendre des algorithmes pour rester visible.</span>
+            <span class="hero2__paren" aria-hidden="true">)</span>
           </p>
-          <div class="hero__cta" data-reveal style="--delay:.4s">
-            <svg class="doodle hero__arrow" viewBox="0 0 120 80" aria-hidden="true"><path pathLength="1" d="M6 12c22 50 62 64 100 40"/><path pathLength="1" d="M90 44l17 7-7 16"/></svg>
-            <div class="badge-circle" aria-hidden="true">
-              <svg class="spin" viewBox="0 0 120 120"><defs><path id="badge-path" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#badge-path" textLength="286" lengthAdjust="spacing">3 places ✺ toutes les 6 semaines ✺</textPath></text></svg>
-              <span class="badge-circle__center"><svg viewBox="0 0 24 24"><path d="M12 0c.6 6.2 5.8 11.4 12 12-6.2.6-11.4 5.8-12 12-.6-6.2-5.8-11.4-12-12C6.2 11.4 11.4 6.2 12 0z"/></svg></span>
-            </div>
-            <a class="btn btn--xl" href="#rendez-vous">Parlons-en
-              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-          </div>
         </div>
+
+        <div class="hero2__bottom">
+          <p class="hero2__pitch" data-reveal>J'accompagne les indépendants et dirigeants à transformer leur expertise en <mark>un média d'autorité</mark> avec Substack, pensé comme un actif durable au service de leur activité.</p>
+          <aside class="proof" data-reveal style="--delay:.1s" aria-labelledby="proof-title">
+            <p class="proof__title" id="proof-title">La preuve par mon propre média</p>
+            <ul class="proof__list">
+              <li><span class="proof__fig">1&nbsp;400</span><span>De zéro à 1&nbsp;400 lecteurs en 5 mois.</span></li>
+              <li><span class="proof__fig">3<sup>e</sup> mois</span><span>Monétisé dès le 3<sup>e</sup> mois.</span></li>
+              <li><span class="proof__fig">Top&nbsp;5</span><span>Jusqu'à la 5<sup>e</sup> place du classement Substack France.</span></li>
+            </ul>
+          </aside>
+        </div>
+
+        <a class="cta-pill" href="#rendez-vous" data-reveal>
+          <span>Parlons-en</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
 
       <!-- Bande éditoriale : sujets d'intervention -->
