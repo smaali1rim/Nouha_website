@@ -35,43 +35,37 @@
 
   <!-- ============ Menu plein écran ============ -->
   <div class="menu" id="menu" aria-hidden="true" inert>
-    <div class="menu__top">
-      <div class="container"><a class="logo" href="index.html">Nouha Smaali <span class="logo__dot" aria-hidden="true"></span></a></div>
-    </div>
-    <div class="container menu__inner">
-      <nav aria-label="Menu principal">
+    <div class="menu__inner">
+      <nav class="menu__nav" aria-label="Menu principal">
         <ol class="menu__list">
-          <li class="menu__item">
+          <li class="menu__item menu__item--1">
             <a class="menu__link" href="index.html#accompagnements"><span class="menu__num">01</span><span class="menu__label">Mes accompagnements</span></a>
             <ul class="menu__sub">
-              <li><a href="accompagnement-construire.html">Construire ton média <span aria-hidden="true">→</span></a></li>
-              <li><a href="accompagnement-transformer.html">Transformer ton média <span aria-hidden="true">→</span></a></li>
+              <li><a href="accompagnement-construire.html">Construire ton média</a></li>
+              <li><a href="accompagnement-transformer.html">Transformer ton média</a></li>
             </ul>
           </li>
-          <li class="menu__item">
-            <a class="menu__link" href="index.html#vision"><span class="menu__num">02</span><span class="menu__label">Ce que je <em>défends</em></span></a>
+          <li class="menu__item menu__item--2">
+            <a class="menu__link" href="index.html#vision"><span class="menu__num">02</span><span class="menu__label">Ce que je défends</span></a>
           </li>
-          <li class="menu__item">
-            <a class="menu__link" href="index.html#retours"><span class="menu__num">03</span><span class="menu__label">Leurs retours <em>sur mon travail</em></span></a>
+          <li class="menu__item menu__item--3">
+            <a class="menu__link" href="index.html#retours"><span class="menu__num">03</span><span class="menu__label">Leurs retours sur mon travail</span></a>
           </li>
-          <li class="menu__item">
-            <a class="menu__link" href="a-propos.html"><span class="menu__num">04</span><span class="menu__label">Un peu plus <em>sur moi</em></span></a>
+          <li class="menu__item menu__item--4">
+            <a class="menu__link" href="a-propos.html"><span class="menu__num">04</span><span class="menu__label">Un peu plus sur moi</span></a>
+          </li>
+          <li class="menu__item menu__item--5 menu__item--cta">
+            <a class="menu__link" href="#rendez-vous"><span class="menu__num">05</span><span class="menu__label">Prendre rendez-vous</span></a>
           </li>
         </ol>
       </nav>
       <aside class="menu__aside" aria-label="Contact">
-        <p class="menu__quote">Ta voix mérite mieux qu'un fil d'actualité. <span>Elle mérite un média.</span></p>
-        <div class="menu__meta">
-          <a class="btn btn--light" href="#rendez-vous">Prendre rendez-vous
-            <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-          <ul class="socials" aria-label="Réseaux">
-            <li><a href="https://substack.com/@nouhasmaali" target="_blank" rel="noopener" aria-label="Substack"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.84h21.08V0z"/></svg></a></li>
-            <li><a href="mailto:bonjour@nouhasmaali.com" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a></li>
-            <li><a href="https://www.linkedin.com/in/nouhasmaali/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
-          </ul>
-          <p class="menu__small">Choisis un créneau, on en parle de vive voix.</p>
-        </div>
+        <img class="menu__photo" src="assets/img/menu-portrait.jpg" alt="Portrait de Nouha Smaali" width="280" height="280" loading="lazy">
+        <ul class="socials socials--menu" aria-label="Réseaux">
+          <li><a href="https://substack.com/@nouhasmaali" target="_blank" rel="noopener" aria-label="Substack"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.84h21.08V0z"/></svg></a></li>
+          <li><a href="mailto:bonjour@nouhasmaali.com" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 6.6A2.6 2.6 0 0 1 4.6 4h14.8A2.6 2.6 0 0 1 22 6.6v.5l-10 6.3L2 7.1zM2 9.5v7.9A2.6 2.6 0 0 0 4.6 20h14.8a2.6 2.6 0 0 0 2.6-2.6V9.5l-10 6.3z"/></svg></a></li>
+          <li><a href="https://www.linkedin.com/in/nouhasmaali/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+        </ul>
       </aside>
     </div>
   </div>
