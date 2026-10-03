@@ -2475,3 +2475,56 @@ main p,
   .benefits, .rollout { grid-template-columns: minmax(0, 1fr); }
   .glance { transform: none; }
 }
+
+/* ==========================================================================
+   Ma vision & ma manière de travailler : lignes éditoriales pleine largeur
+   ========================================================================== */
+.creed__head { margin-bottom: clamp(48px, 7vw, 110px); }
+.creed__head .eyebrow { margin-bottom: 24px; }
+.vision .creed__heading {
+  max-width: none;
+  width: 100%;
+  font-size: clamp(2.8rem, 8.4vw, 9.5rem);
+  line-height: 0.98;
+}
+.creed { list-style: none; padding: 0; margin: 0; border-bottom: 1px solid rgba(254, 250, 224, 0.22); }
+.creed__item {
+  display: grid;
+  grid-template-columns: minmax(70px, 0.9fr) minmax(0, 4fr) minmax(0, 5fr);
+  gap: clamp(16px, 3vw, 56px);
+  align-items: start;
+  padding-block: clamp(32px, 4vw, 60px);
+  border-top: 1px solid rgba(254, 250, 224, 0.22);
+}
+.creed__num {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-synthesis: none;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-size: clamp(3rem, 5.4vw, 6rem);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--paper);
+  transition: color 0.4s var(--ease), -webkit-text-stroke-color 0.4s;
+}
+.creed__item:hover .creed__num { color: var(--accent-on-dark); -webkit-text-stroke-color: var(--accent-on-dark); }
+.creed__title {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+.creed__title em { display: block; font-weight: 400; color: var(--accent-on-dark); }
+.creed__text p { color: rgba(254, 250, 224, 0.8); line-height: 1.7; }
+.creed__text p + p { margin-top: 12px; }
+.creed__text strong { color: var(--paper); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .creed__item { grid-template-columns: minmax(56px, auto) minmax(0, 1fr); }
+  .creed__text { grid-column: 2; }
+}
+@media (max-width: 560px) {
+  .creed__item { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .creed__text { grid-column: auto; }
+}
