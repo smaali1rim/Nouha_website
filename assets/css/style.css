@@ -840,7 +840,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .proof__title {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: clamp(1.05rem, 0.5vw + 0.9rem, 1.3rem);
+  font-size: clamp(1.05rem, 1.5vw + 0.9rem, 1.3rem);
   margin-bottom: 14px;
 }
 .proof__list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
@@ -943,6 +943,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 
 /* ---------- Bande éditoriale : cartes qui défilent ---------- */
 .ticker {
+  --ticker-duration: 20s;
   position: relative;
   z-index: 2;
   margin-top: clamp(32px, 4vw, 64px);
@@ -952,7 +953,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .ticker__track {
   display: flex;
   width: max-content;
-  animation: ticker 32s linear infinite;
+  animation: ticker var(--ticker-duration) linear infinite;
 }
 .ticker__list {
   display: flex;
@@ -964,19 +965,23 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   flex: none;
 }
 .ticker__list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   min-width: clamp(220px, 24vw, 440px);
-  min-height: clamp(110px, 10vw, 170px);
+  min-height: clamp(140px, 13vw, 220px);
   padding: clamp(14px, 1.4vw, 22px) clamp(24px, 3vw, 44px);
   background: var(--card);
   border: 1.5px solid var(--ink);
   border-radius: clamp(18px, 1.8vw, 28px);
   font-family: var(--font-editorial);
   font-weight: 400;
-  font-size: clamp(1.45rem, 2.3vw, 2.6rem);
+  font-size: clamp(3.65rem, 4.6vw, 4rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--ink);
   white-space: nowrap;
+  text-align: center;
 }
 @keyframes ticker { to { transform: translateX(-50%); } }
 
@@ -2635,13 +2640,13 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   .hero2 > .container { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   .hero2__bottom { margin-top: clamp(14px, 3.6vh, 56px); }
   .hero2__pitch { font-size: clamp(1rem, 2.3vh, 1.55rem); max-width: 36ch; }
-  .proof__title { margin-bottom: clamp(6px, 1.2vh, 14px); font-size: clamp(0.95rem, 2vh, 1.25rem); }
+
   .proof__list li { padding-top: clamp(8px, 1.4vh, 16px); font-size: clamp(0.8rem, 1.75vh, 0.92rem); }
   .proof__fig { font-size: clamp(1.4rem, 4vh, 2.8rem); }
   .hero2 .ticker { margin-top: clamp(16px, 3vh, 40px); }
   .hero2 .ticker__list li {
-    min-height: clamp(56px, 9vh, 150px);
-    font-size: clamp(1.05rem, 2.6vh, 2.4rem);
+    min-height: clamp(120px, 15vh, 220px);
+    font-size: clamp(1.45rem, 3.5vh, 3rem);
     padding-block: clamp(10px, 1.6vh, 20px);
   }
 }
@@ -2738,6 +2743,10 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
 
 /* --- Hero : titre resserré et centré (ordinateur) --- */
 @media (min-width: 1101px) {
+  .hero2__thread {
+    left: -55%;
+    top: calc(-1 * (var(--header-h) + 5px));
+  }
   .hero2__stage {
     width: calc(var(--hs) * 12.2);
     max-width: 100%;
@@ -2762,7 +2771,7 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: 400;
-  font-size: 0.74em;
+  font-size: 0.9em;
   letter-spacing: -0.03em;
   line-height: 1.12;
 }
@@ -2777,7 +2786,7 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   letter-spacing: -0.02em;
 }
 .hero2__row--3 { margin-top: 0.16em; }
-.hero2__avatar { width: 1.5em; height: 1.5em; }
+.hero2__avatar { width: 1.8em; height: 1.8em; }
 /* Mise en page : chapeau en italique + parenthèse en haut, grand titre en dessous */
 @media (min-width: 768px) {
   .hero2__stage { width: calc(var(--hs) * 11.6); max-width: 100%; margin-inline: auto; }
@@ -2789,9 +2798,9 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
 }
 @media (min-width: 1101px) {
   .hero2 .hero2__aside {
-    top: 0;
-    right: 0;
-    width: calc(var(--hs) * 4);
+    top: calc(var(--hs) * 1.14);
+    right: -250px;
+    width: calc(var(--hs) * 5.5);
     height: calc(var(--hs) * 0.74 * 1.12 * 2);
     min-height: 0;
   }
@@ -2799,5 +2808,24 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
 @media (max-width: 600px) {
   .hero2__row--3, .hero2__row--4 { font-size: 1.1em; }
   .hero2__row--4 { padding-left: 8%; }
-  .hero2__avatar { width: 1.3em; height: 1.3em; }
+  .hero2__avatar { width: 1.55em; height: 1.55em; }
+}
+
+/* All home-page section titles share the Mes accompagnements size. */
+#offers-title,
+#vision-title,
+#voices-title,
+#about-title,
+#booking-title {
+  font-size: calc(clamp(4rem, 5vw, 5rem) * 0.92);
+}
+#about-title .line:first-child { font-size: inherit; }
+@media (max-width: 600px) {
+  #offers-title,
+  #vision-title,
+  #voices-title,
+  #about-title,
+  #booking-title {
+    font-size: calc(clamp(1.9rem, 8.4vw, 3.4rem) * 0.92);
+  }
 }
