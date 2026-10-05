@@ -367,149 +367,99 @@
   }
 
   /* ------------------------------------------------------------------
-     Trait fin qui traverse le site (home)
-     Le tracé est calculé à partir de la mise en page réelle : il passe
-     dans les espaces entre les mots du hero, puis descend dans les marges
-     latérales et change de côté dans les espaces entre les sections.
+     Trait fin qui traverse tout le site (home)
+     Une ligne libre qui serpente de haut en bas, avec quelques boucles.
+     Elle se dessine au fil du scroll. Sa couleur s'adapte au fond de
+     chaque section (foncée sur fond clair, claire sur fond foncé).
      ------------------------------------------------------------------ */
   var thread = document.getElementById("page-thread");
   if (thread) {
-    var drawn = {};
+    var NS = "http://www.w3.org/2000/svg";
     var threadTimer = null;
-
-    var box = function (el) {
-      var r = el.getBoundingClientRect();
-      return { l: r.left + window.scrollX, r: r.right + window.scrollX, t: r.top + window.scrollY, b: r.bottom + window.scrollY };
-    };
+    var threadPaths = [];
     var f = function (n) { return Math.round(n * 10) / 10; };
-    var tw = function (k) { return document.querySelector('[data-tw="' + k + '"]'); };
+    var docTop = function (el) { return el.getBoundingClientRect().top + window.scrollY; };
     var isDark = function (el) {
       var c = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
       if (!c || (c[3] !== undefined && +c[3] === 0)) return false;
       return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) < 110;
     };
-    // vertical run with a gentle sway, from (x, y0) to (x, y1)
-    var run = function (x, y0, y1, sway) {
-      var n = Math.max(1, Math.round((y1 - y0) / 420));
-      var d = "", step = (y1 - y0) / n;
-      for (var i = 0; i < n; i++) {
-        var a = y0 + step * i, b = a + step, s = (i % 2 ? -1 : 1) * sway;
-        d += " C" + f(x + s) + "," + f(a + step / 3) + " " + f(x - s) + "," + f(a + 2 * step / 3) + " " + f(x) + "," + f(b);
-      }
-      return d;
-    };
 
     var buildThread = function () {
-      var hero = document.querySelector(".hero2");
-      var words = ["deviens", "evidence", "esprit", "des", "personnes"].map(tw);
-      if (!hero || words.some(function (w) { return !w; }) || window.innerWidth < 768) {
-        thread.style.display = "none";
-        return;
-      }
+      var footer = document.querySelector(".site-footer");
+      if (!footer || window.innerWidth < 768) { thread.style.display = "none"; return; }
       thread.style.display = "";
       thread.innerHTML = "";
+      threadPaths = [];
 
-      var vw = document.documentElement.clientWidth;
-      var cont = hero.querySelector(".container");
-      var cs = getComputedStyle(cont), cb = box(cont);
-      var cL = cb.l + parseFloat(cs.paddingLeft), cR = cb.r - parseFloat(cs.paddingRight);
-      var gut = { L: cL / 2, R: cR + (vw - cR) / 2 };
-      var sway = Math.min(14, cL / 4);
+      var W = document.documentElement.clientWidth;
+      var H = docTop(footer) + footer.offsetHeight;
+      thread.setAttribute("width", W);
+      thread.setAttribute("height", Math.ceil(H));
+      thread.style.height = Math.ceil(H) + "px";
 
-      var dv = box(words[0]), ev = box(words[1]), es = box(words[2]), de = box(words[3]), pe = box(words[4]);
-      var title = box(hero.querySelector(".hero2__title"));
-      var aside = box(hero.querySelector(".hero2__aside"));
-      var pitch = box(hero.querySelector(".hero2__pitch"));
-      var proof = box(hero.querySelector(".proof"));
-      var heroB = box(hero).b;
-
-      // 1. Hero: entre « Deviens » et « l'évidence », puis à gauche de « dans l'esprit »
-      var x1 = (dv.r + ev.l) / 2;
-      var gap1 = ev.l - dv.r;
-      var xL = Math.max(cL * 0.6, (cL + de.l) / 2);          // à gauche de « des »
-      if (de.l - cL < 40) xL = gut.L;
-      var d = "M" + f(x1) + ",0";
-      d += " C" + f(x1 + gap1 * 0.28) + "," + f(dv.t * 0.45) + " " + f(x1 - gap1 * 0.3) + "," + f(dv.t * 0.9) + " " + f(x1) + "," + f((dv.t + dv.b) / 2);
-      // petite boucle dans l'espace entre les deux mots
-      var lr = Math.min(gap1 * 0.3, 34);
-      d += " C" + f(x1) + "," + f(dv.b) + " " + f(x1 + lr) + "," + f(dv.b - lr) + " " + f(x1 + lr * 0.4) + "," + f(dv.b - lr * 1.4);
-      d += " C" + f(x1 - lr * 0.6) + "," + f(dv.b - lr * 1.9) + " " + f(x1 - lr) + "," + f(dv.b) + " " + f(x1) + "," + f(dv.b + 4);
-      // descente en diagonale dans le vide à gauche de « dans l'esprit », jusqu'à gauche de « des »
-      var esH = es.b - es.t;
-      var yRow3 = es.b - esH * 0.12;
-      d += " C" + f(x1) + "," + f(dv.b + (es.b - dv.b) * 0.45) + " " + f(xL) + "," + f(es.t + esH * 0.35) + " " + f(xL) + "," + f(yRow3);
-
-      // 2. Sous le titre : vers l'espace entre le paragraphe et la preuve sociale
-      var below = Math.max(title.b, aside.b > title.b ? aside.b : 0);
-      var topBottom = Math.min(pitch.t, proof.t);
-      var yM = (below + topBottom) / 2;
-      var sideBySide = proof.l - pitch.r > 50 && proof.t < pitch.b;
-      var xG = sideBySide ? (pitch.r + proof.l) / 2 : gut.L;
-      d += run(xL, yRow3, yM - 30, 0);
-      d += " C" + f(xL) + "," + f(yM) + " " + f(xG) + "," + f(yM) + " " + f(xG) + "," + f(yM + 30);
-
-      // 3. Sections suivantes : descente dans les marges, changement de côté entre deux sections
-      var sections = Array.prototype.slice.call(document.querySelectorAll("main > section")).filter(function (s) { return s !== hero; });
-      var footer = document.querySelector(".site-footer");
-      if (footer) sections.push(footer);
-
-      var segs = [{ d: d, el: hero }];
-      var x = xG, y = yM + 30, side = "L", h = 56;
-      sections.forEach(function (sec, i) {
-        var yb = box(sec).t, xb = gut[side];
-        segs[segs.length - 1].d += run(x, y, yb - h, x === xG ? 0 : sway);
-        // courbe en S coupée à la frontière (moitié dans chaque section)
-        segs[segs.length - 1].d += " C" + f(x) + "," + f(yb - h / 2) + " " + f((3 * x + xb) / 4) + "," + f(yb - h / 4) + " " + f((x + xb) / 2) + "," + f(yb);
-        segs.push({ d: "M" + f((x + xb) / 2) + "," + f(yb) + " C" + f((x + 3 * xb) / 4) + "," + f(yb + h / 4) + " " + f(xb) + "," + f(yb + h / 2) + " " + f(xb) + "," + f(yb + h), el: sec });
-        x = xb; y = yb + h; side = side === "L" ? "R" : "L";
-      });
-      var last = segs[segs.length - 1];
-      last.d += run(x, y, box(last.el).b - 2, sway);
-
-      var maxB = box(last.el).b;
-      thread.setAttribute("width", vw);
-      thread.setAttribute("height", Math.ceil(maxB));
-      thread.style.height = Math.ceil(maxB) + "px";
-
-      segs.forEach(function (sg, i) {
-        var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        p.setAttribute("d", sg.d);
-        p.setAttribute("pathLength", "1");
-        p.setAttribute("stroke", isDark(sg.el) ? "rgba(254, 250, 224, 0.75)" : "rgba(30, 59, 39, 0.8)");
-        p.dataset.seg = i;
-        if (drawn[i] || reduceMotion) p.classList.add("is-drawn");
-        thread.appendChild(p);
-        sg.p = p;
-      });
-
-      // dessin progressif : chaque morceau se trace quand sa section entre à l'écran
-      if ("IntersectionObserver" in window) {
-        var tio = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (!en.isIntersecting) return;
-            segs.forEach(function (sg, i) {
-              if (sg.el === en.target && !drawn[i]) {
-                drawn[i] = true;
-                requestAnimationFrame(function () { sg.p.classList.add("is-drawn"); });
-              }
-            });
-            tio.unobserve(en.target);
-          });
-        }, { rootMargin: "0px 0px -15% 0px" });
-        segs.forEach(function (sg, i) { if (!drawn[i]) tio.observe(sg.el); });
-      } else {
-        segs.forEach(function (sg) { sg.p.classList.add("is-drawn"); });
+      // Tracé : on part du haut, puis on balaie la page d'un côté à l'autre
+      var xs = [0.56, 0.12, 0.82, 0.3, 0.9, 0.08, 0.64, 0.18, 0.86, 0.4, 0.94, 0.1];
+      var step = Math.max(520, Math.min(900, window.innerHeight * 0.85));
+      var x = W * 0.56, y = -10;
+      var d = "M" + f(x) + "," + f(y);
+      var k = 1;
+      while (y < H - 10) {
+        var ny = Math.min(H, y + step);
+        var nx = W * xs[k % xs.length];
+        // courbe douce avec tangentes verticales
+        d += " C" + f(x) + "," + f(y + (ny - y) * 0.55) + " " + f(nx) + "," + f(ny - (ny - y) * 0.55) + " " + f(nx) + "," + f(ny);
+        // une petite boucle de temps en temps
+        if (k % 3 === 1 && ny < H - 120) {
+          var r = 26 + (k % 2) * 10, dir = nx > W / 2 ? -1 : 1;
+          d += " C" + f(nx) + "," + f(ny + r * 0.9) + " " + f(nx + dir * r * 1.3) + "," + f(ny + r * 0.6) + " " + f(nx + dir * r * 1.1) + "," + f(ny - r * 0.3);
+          d += " C" + f(nx + dir * r * 0.9) + "," + f(ny - r * 1.2) + " " + f(nx - dir * r * 0.2) + "," + f(ny - r * 0.6) + " " + f(nx) + "," + f(ny + r * 0.4);
+          ny += r * 0.4;
+        }
+        x = nx; y = ny; k++;
       }
+
+      // une copie du tracé par section, découpée à sa hauteur, avec la couleur adaptée au fond
+      var defs = document.createElementNS(NS, "defs");
+      thread.appendChild(defs);
+      var blocks = Array.prototype.slice.call(document.querySelectorAll("main > section"));
+      blocks.push(footer);
+      blocks.forEach(function (el, i) {
+        var top = i === 0 ? 0 : docTop(el);
+        var next = blocks[i + 1];
+        var bottom = next ? docTop(next) : H;
+        var cp = document.createElementNS(NS, "clipPath");
+        cp.id = "thread-clip-" + i;
+        var rc = document.createElementNS(NS, "rect");
+        rc.setAttribute("x", 0); rc.setAttribute("y", f(top));
+        rc.setAttribute("width", W); rc.setAttribute("height", f(Math.max(0, bottom - top)));
+        cp.appendChild(rc); defs.appendChild(cp);
+        var p = document.createElementNS(NS, "path");
+        p.setAttribute("d", d);
+        p.setAttribute("pathLength", "1");
+        p.setAttribute("clip-path", "url(#thread-clip-" + i + ")");
+        p.setAttribute("stroke", isDark(el) ? "rgba(254, 250, 224, 0.8)" : "rgba(30, 59, 39, 0.8)");
+        thread.appendChild(p);
+        threadPaths.push(p);
+      });
+      drawThread();
     };
+
+    // la ligne se dessine jusqu'au bas de l'écran, au fil du scroll
+    var drawThread = function () {
+      if (!threadPaths.length) return;
+      var H = parseFloat(thread.getAttribute("height")) || 1;
+      var shown = reduceMotion ? 1 : Math.min(1, (window.scrollY + window.innerHeight * 0.95) / H);
+      threadPaths.forEach(function (p) { p.style.strokeDashoffset = 1 - shown; });
+    };
+    window.addEventListener("scroll", drawThread, { passive: true });
 
     var scheduleThread = function (delay) {
       clearTimeout(threadTimer);
       threadTimer = setTimeout(buildThread, delay || 150);
     };
     scheduleThread(60);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { scheduleThread(60); });
     window.addEventListener("load", function () { scheduleThread(60); });
-    setTimeout(function () { scheduleThread(0); }, 1400); // après les apparitions du hero
     window.addEventListener("resize", function () { scheduleThread(200); });
     if ("ResizeObserver" in window) {
       var lastH = 0;

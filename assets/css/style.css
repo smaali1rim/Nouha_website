@@ -2606,10 +2606,8 @@ main p,
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 2.2s var(--ease);
+  transition: stroke-dashoffset 0.35s linear;
 }
-.page-thread path.is-drawn { stroke-dashoffset: 0; }
-@media (prefers-reduced-motion: reduce) { .page-thread path { stroke-dashoffset: 0; } }
 
 /* --- Séparation des sections : « feuilles » arrondies qui se superposent --- */
 :root { --sheet-r: clamp(24px, 3.2vw, 52px); }
