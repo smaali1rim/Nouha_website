@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..800,100,1&family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..800,100,1&family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500;1,7..72,700&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="preconnect" href="https://assets.calendly.com">
   <script>document.documentElement.classList.add("js");</script>
@@ -70,14 +70,10 @@
     <section class="hero hero2" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero2__stage">
-          <!-- Trait dessiné qui traverse la composition -->
-          <svg class="hero2__thread draw" data-reveal viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-            <path pathLength="1" vector-effect="non-scaling-stroke" d="M560 0C590 120 600 260 470 330C380 380 330 350 350 318C376 284 452 320 450 400C448 480 360 520 340 600C322 680 380 780 420 1000"/>
-          </svg>
           <h1 class="hero2__title" id="hero-title">
             <span class="hero2__row hero2__row--1" data-reveal>
-              <span>Deviens</span>
-              <span class="hero2__push">l'évidence
+              <span data-tw="deviens">Deviens</span>
+              <span class="hero2__push"><span data-tw="evidence">l'évidence</span>
                 <span class="hero2__avatar inline-photo--slideshow" aria-hidden="true">
                   <img src="assets/img/hero-avatar-1.jpg" alt="">
                   <img src="assets/img/hero-avatar-2.jpg" alt="">
@@ -85,9 +81,9 @@
                 </span>
               </span>
             </span>
-            <span class="hero2__row hero2__row--2" data-reveal style="--delay:.08s">dans l'esprit</span>
-            <span class="hero2__row hero2__row--3" data-reveal style="--delay:.16s">des <em>bonnes</em></span>
-            <span class="hero2__row hero2__row--4" data-reveal style="--delay:.24s"><em>personnes.</em></span>
+            <span class="hero2__row hero2__row--2" data-reveal style="--delay:.08s"><span data-tw="esprit">dans l'esprit</span></span>
+            <span class="hero2__row hero2__row--3" data-reveal style="--delay:.16s"><span data-tw="des">des</span> <strong data-tw="bonnes">bonnes</strong></span>
+            <span class="hero2__row hero2__row--4" data-reveal style="--delay:.24s"><strong data-tw="personnes">personnes.</strong></span>
           </h1>
           <p class="hero2__aside" data-reveal style="--delay:.32s">
             <span class="hero2__paren" aria-hidden="true">(</span>
@@ -107,11 +103,6 @@
             </ul>
           </aside>
         </div>
-
-        <a class="cta-pill" href="#rendez-vous" data-reveal>
-          <span>Parlons de ton média</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
       </div>
 
       <!-- Bande éditoriale : sujets d'intervention -->
@@ -274,7 +265,7 @@
           <!-- Vidéo -->
           <div class="v-obj v-video-1" data-reveal>
             <button class="video-thumb" type="button" data-video="assets/media/temoignage-video.webm" data-portrait data-title="Amélie, fondatrice d'agence — témoignage vidéo">
-              <img src="assets/img/poster-1.svg" alt="" loading="lazy">
+              <img src="assets/img/poster-1.png" alt="" loading="lazy">
               <span class="video-thumb__dur">1:12</span>
               <svg class="video-thumb__ring spin" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="ring-1" d="M60 60m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text><textPath href="#ring-1" textLength="310" lengthAdjust="spacing">Voir la vidéo ✺ voir la vidéo ✺</textPath></text></svg>
               <span class="video-thumb__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
@@ -467,6 +458,9 @@
     <div class="video-modal__frame"></div>
     <p class="video-modal__caption"></p>
   </dialog>
+
+  <!-- Trait fin qui traverse tout le site (tracé en JS dans les espaces vides) -->
+  <svg class="page-thread" id="page-thread" aria-hidden="true"><path pathLength="1"/></svg>
 
   <script src="assets/js/main.js" defer></script>
 </body>

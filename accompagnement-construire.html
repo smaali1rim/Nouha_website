@@ -15,12 +15,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..800,100,1&family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..800,100,1&family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500;1,7..72,700&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="preconnect" href="https://assets.calendly.com">
   <script>document.documentElement.classList.add("js");</script>
 </head>
-<body id="top">
+<body id="top" class="offer-page">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
   <!-- ============ En-tête ============ -->
@@ -35,7 +35,7 @@
     <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
   </button>
 
-  <a class="page-close" href="index.html" aria-label="Retour à l'accueil">
+  <a class="page-close" href="index.html#accompagnements" aria-label="Retour à mes accompagnements">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M6 6l12 12M18 6L6 18"/>
     </svg>
@@ -94,18 +94,16 @@
           <div data-reveal style="--delay:.1s">
             <p class="page-hero__who">Tu as l'expertise, mais pas encore de présence éditoriale ou d'audience établie → on construit tout de zéro brique par brique.</p>
             <p class="page-hero__intro">On pose les fondations — <strong>positionnement, stratégie éditoriale, architecture et maîtrise de Substack</strong> — puis on travaille la croissance et la monétisation pour en faire <strong>un actif durable</strong>&nbsp;: un média qui rend ton expertise visible, construit une audience qui t'appartient et crée des opportunités pour ton activité.</p>
-            <a class="btn btn--xl" href="#rendez-vous">Je veux construire mon média
-              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
           </div>
-          <aside class="glance" data-reveal style="--delay:.2s" aria-label="En bref">
-            <p class="glance__title">En bref</p>
-            <dl>
-              <div><dt>6 étapes</dt><dd>sur 6 semaines</dd></div>
-              <div><dt>6 visios</dt><dd>pour décider, ajuster et avancer</dd></div>
-              <div><dt>6 livrables</dt><dd>stratégiques, entièrement personnalisés</dd></div>
-              <div><dt>Notion</dt><dd>un espace dédié à ton accompagnement</dd></div>
-            </dl>
+          <aside class="glance glance--fit" data-reveal style="--delay:.2s" aria-labelledby="fit-title">
+            <p class="glance__title" id="fit-title">C'est pour toi si…</p>
+            <ul class="fit-list">
+              <li>Tu as une vraie expertise, mais pas encore la présence éditoriale qui va avec.</li>
+              <li>Ton message manque de clarté&nbsp;: on ne comprend pas tout de suite ce que tu fais, pour qui et pourquoi toi.</li>
+              <li>Tu publies peu, ou au hasard, sans direction ni système pour tenir dans la durée.</li>
+              <li>Tu veux une audience qui t'appartient, sans dépendre des algorithmes.</li>
+              <li>Tu veux un média qui serve réellement ton activité, pas seulement ta visibilité.</li>
+            </ul>
           </aside>
         </div>
       </div>
@@ -115,7 +113,6 @@
     <section class="section" aria-labelledby="today-title">
       <div class="container split split--prose">
         <div class="split__aside detail-head" data-reveal>
-          <p class="eyebrow">01 — Aujourd'hui</p>
           <h2 class="section-title" id="today-title">Aujourd'hui</h2>
         </div>
         <div class="prose" data-reveal>
@@ -133,7 +130,6 @@
     <section class="section" style="background:var(--paper-2)" aria-labelledby="tomorrow-title">
       <div class="container">
         <div class="detail-head" data-reveal>
-          <p class="eyebrow">02 — Demain</p>
           <h2 class="section-title" id="tomorrow-title">Demain</h2>
         </div>
         <p class="benefits-lead" data-reveal>À la fin de l'accompagnement, tu repars avec <strong>un média pensé comme un actif durable pour ton activité et ta marque personnelle.</strong></p>
@@ -150,8 +146,7 @@
     <section class="section" aria-labelledby="method-title">
       <div class="container split">
         <div class="split__aside detail-head" data-reveal>
-          <p class="eyebrow">03 — La méthode</p>
-          <h2 class="section-title" id="method-title">La <em>méthode</em></h2>
+          <h2 class="section-title" id="method-title">La méthode</h2>
           <p style="margin-top:24px;color:var(--ink-2);max-width:32ch">6 étapes, chacune avec un résultat concret.</p>
         </div>
         <ol class="steps">
@@ -169,8 +164,7 @@
     <section class="section section--dark" aria-labelledby="rollout-title">
       <div class="container">
         <div class="detail-head" data-reveal>
-          <p class="eyebrow">04 — Le déroulement</p>
-          <h2 class="section-title" id="rollout-title">Le <em>déroulement</em></h2>
+          <h2 class="section-title" id="rollout-title">Le déroulement</h2>
         </div>
         <p class="rollout__big" data-reveal>6 étapes <em>sur</em> 6 semaines</p>
         <ul class="rollout">
