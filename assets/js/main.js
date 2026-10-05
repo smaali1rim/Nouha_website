@@ -368,17 +368,20 @@
 
   /* ------------------------------------------------------------------
      Trait fin qui traverse tout le site (home)
-     Une ligne libre qui serpente de haut en bas, avec quelques boucles.
-     Elle se dessine au fil du scroll. Sa couleur s'adapte au fond de
-     chaque section (foncée sur fond clair, claire sur fond foncé).
+     Le hero garde sa ligne d'origine (#hero-thread). Le trait reprend là
+     où elle s'arrête et descend jusqu'en bas en balayant la page.
+     Statique, placé en arrière-plan de chaque section (sous les cartes
+     et les textes), clair sur fond foncé et foncé sur fond clair.
      ------------------------------------------------------------------ */
-  var thread = document.getElementById("page-thread");
-  if (thread) {
+  var heroThread = document.getElementById("hero-thread");
+  if (heroThread) {
     var NS = "http://www.w3.org/2000/svg";
     var threadTimer = null;
-    var threadPaths = [];
     var f = function (n) { return Math.round(n * 10) / 10; };
-    var docTop = function (el) { return el.getBoundingClientRect().top + window.scrollY; };
+    var pageBox = function (el) {
+      var r = el.getBoundingClientRect();
+      return { l: r.left + window.scrollX, t: r.top + window.scrollY, w: r.width, h: r.height, b: r.bottom + window.scrollY };
+    };
     var isDark = function (el) {
       var c = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
       if (!c || (c[3] !== undefined && +c[3] === 0)) return false;
@@ -386,31 +389,30 @@
     };
 
     var buildThread = function () {
+      document.querySelectorAll(".sec-thread").forEach(function (n) { n.remove(); });
       var footer = document.querySelector(".site-footer");
-      if (!footer || window.innerWidth < 768) { thread.style.display = "none"; return; }
-      thread.style.display = "";
-      thread.innerHTML = "";
-      threadPaths = [];
+      var hero = heroThread.closest("section");
+      if (!footer || !hero || window.innerWidth < 768) return;
 
       var W = document.documentElement.clientWidth;
-      var H = docTop(footer) + footer.offsetHeight;
-      thread.setAttribute("width", W);
-      thread.setAttribute("height", Math.ceil(H));
-      thread.style.height = Math.ceil(H) + "px";
+      var blocks = Array.prototype.slice.call(document.querySelectorAll("main > section"));
+      blocks.push(footer);
+      var H = pageBox(footer).b;
 
-      // Tracé : on part du haut, puis on balaie la page d'un côté à l'autre
-      var xs = [0.56, 0.12, 0.82, 0.3, 0.9, 0.08, 0.64, 0.18, 0.86, 0.4, 0.94, 0.1];
-      var step = Math.max(520, Math.min(900, window.innerHeight * 0.85));
-      var x = W * 0.56, y = -10;
+      // point d'arrivée de la ligne du hero (x = 42 % du dessin, bas du dessin)
+      var hb = pageBox(heroThread);
+      var x = hb.l + hb.w * 0.42, y = hb.b;
       var d = "M" + f(x) + "," + f(y);
-      var k = 1;
+
+      // descente en grandes courbes d'un côté à l'autre, avec quelques boucles
+      var xs = [0.16, 0.84, 0.3, 0.9, 0.08, 0.66, 0.2, 0.88, 0.42, 0.94, 0.12];
+      var step = Math.max(560, Math.min(900, window.innerHeight * 0.9));
+      var k = 0;
       while (y < H - 10) {
-        var ny = Math.min(H, y + step);
+        var ny = Math.min(H + 20, y + step);
         var nx = W * xs[k % xs.length];
-        // courbe douce avec tangentes verticales
         d += " C" + f(x) + "," + f(y + (ny - y) * 0.55) + " " + f(nx) + "," + f(ny - (ny - y) * 0.55) + " " + f(nx) + "," + f(ny);
-        // une petite boucle de temps en temps
-        if (k % 3 === 1 && ny < H - 120) {
+        if (k % 3 === 1 && ny < H - 160) {
           var r = 26 + (k % 2) * 10, dir = nx > W / 2 ? -1 : 1;
           d += " C" + f(nx) + "," + f(ny + r * 0.9) + " " + f(nx + dir * r * 1.3) + "," + f(ny + r * 0.6) + " " + f(nx + dir * r * 1.1) + "," + f(ny - r * 0.3);
           d += " C" + f(nx + dir * r * 0.9) + "," + f(ny - r * 1.2) + " " + f(nx - dir * r * 0.2) + "," + f(ny - r * 0.6) + " " + f(nx) + "," + f(ny + r * 0.4);
@@ -419,46 +421,31 @@
         x = nx; y = ny; k++;
       }
 
-      // une copie du tracé par section, découpée à sa hauteur, avec la couleur adaptée au fond
-      var defs = document.createElementNS(NS, "defs");
-      thread.appendChild(defs);
-      var blocks = Array.prototype.slice.call(document.querySelectorAll("main > section"));
-      blocks.push(footer);
-      blocks.forEach(function (el, i) {
-        var top = i === 0 ? 0 : docTop(el);
-        var next = blocks[i + 1];
-        var bottom = next ? docTop(next) : H;
-        var cp = document.createElementNS(NS, "clipPath");
-        cp.id = "thread-clip-" + i;
-        var rc = document.createElementNS(NS, "rect");
-        rc.setAttribute("x", 0); rc.setAttribute("y", f(top));
-        rc.setAttribute("width", W); rc.setAttribute("height", f(Math.max(0, bottom - top)));
-        cp.appendChild(rc); defs.appendChild(cp);
+      // un calque par section, sous son contenu
+      blocks.forEach(function (el) {
+        var b = pageBox(el);
+        var svg = document.createElementNS(NS, "svg");
+        svg.setAttribute("class", "sec-thread");
+        svg.setAttribute("aria-hidden", "true");
+        svg.setAttribute("width", f(b.w));
+        svg.setAttribute("height", f(b.h));
+        var g = document.createElementNS(NS, "g");
+        g.setAttribute("transform", "translate(" + f(-b.l) + "," + f(-b.t) + ")");
         var p = document.createElementNS(NS, "path");
         p.setAttribute("d", d);
-        p.setAttribute("pathLength", "1");
-        p.setAttribute("clip-path", "url(#thread-clip-" + i + ")");
-        p.setAttribute("stroke", isDark(el) ? "rgba(254, 250, 224, 0.8)" : "rgba(30, 59, 39, 0.8)");
-        thread.appendChild(p);
-        threadPaths.push(p);
+        p.setAttribute("stroke", isDark(el) ? "rgba(254, 250, 224, 0.75)" : "rgba(30, 59, 39, 0.75)");
+        g.appendChild(p);
+        svg.appendChild(g);
+        el.insertBefore(svg, el.firstChild);
       });
-      drawThread();
     };
-
-    // la ligne se dessine jusqu'au bas de l'écran, au fil du scroll
-    var drawThread = function () {
-      if (!threadPaths.length) return;
-      var H = parseFloat(thread.getAttribute("height")) || 1;
-      var shown = reduceMotion ? 1 : Math.min(1, (window.scrollY + window.innerHeight * 0.95) / H);
-      threadPaths.forEach(function (p) { p.style.strokeDashoffset = 1 - shown; });
-    };
-    window.addEventListener("scroll", drawThread, { passive: true });
 
     var scheduleThread = function (delay) {
       clearTimeout(threadTimer);
       threadTimer = setTimeout(buildThread, delay || 150);
     };
     scheduleThread(60);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { scheduleThread(60); });
     window.addEventListener("load", function () { scheduleThread(60); });
     window.addEventListener("resize", function () { scheduleThread(200); });
     if ("ResizeObserver" in window) {

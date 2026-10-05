@@ -70,6 +70,10 @@
     <section class="hero hero2" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero2__stage">
+          <!-- Trait fin du hero (ligne d'origine, inspirée de la référence) -->
+          <svg class="hero2__thread" id="hero-thread" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <path vector-effect="non-scaling-stroke" d="M560 0C590 120 600 260 470 330C380 380 330 350 350 318C376 284 452 320 450 400C448 480 360 520 340 600C322 680 380 780 420 1000"/>
+          </svg>
           <h1 class="hero2__title" id="hero-title">
             <span class="hero2__row hero2__row--1" data-reveal>
               <span data-tw="deviens">Deviens</span>
@@ -458,9 +462,6 @@
     <div class="video-modal__frame"></div>
     <p class="video-modal__caption"></p>
   </dialog>
-
-  <!-- Trait fin qui traverse tout le site (tracé en JS dans les espaces vides) -->
-  <svg class="page-thread" id="page-thread" aria-hidden="true"><path pathLength="1"/></svg>
 
   <script src="assets/js/main.js" defer></script>
 </body>

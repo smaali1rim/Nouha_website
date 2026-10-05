@@ -2588,26 +2588,19 @@ main p,
   letter-spacing: -0.035em;
 }
 
-/* --- Trait fin qui traverse tout le site (tracé par main.js) --- */
-.page-thread {
+/* --- Trait fin : statique, en arrière-plan (derrière les cartes et les textes) --- */
+.hero2__thread { z-index: -1; }
+.js .hero2__thread[data-reveal] path { transition: none; }
+main > section, .site-footer { isolation: isolate; }
+.sec-thread {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 0;
-  z-index: 1;
+  z-index: -1;
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden;
 }
-.page-thread path {
-  fill: none;
-  stroke-width: 1.3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 0.35s linear;
-}
+.sec-thread path { fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 
 /* --- Séparation des sections : « feuilles » arrondies qui se superposent --- */
 :root { --sheet-r: clamp(24px, 3.2vw, 52px); }
