@@ -2756,3 +2756,48 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
     min-height: calc(var(--hs) * 1.04);
   }
 }
+
+/* --- Hero : « des bonnes personnes » devient le texte principal --- */
+.hero2__row--1, .hero2__row--2 {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.74em;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+.hero2__row--3, .hero2__row--4 {
+  font-size: 1.22em;
+  line-height: 0.98;
+}
+.hero2__title strong {
+  font-family: var(--font-accent);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.hero2__row--3 { margin-top: 0.16em; }
+.hero2__avatar { width: 1.5em; height: 1.5em; }
+/* Mise en page : chapeau en italique + parenthèse en haut, grand titre en dessous */
+@media (min-width: 768px) {
+  .hero2__stage { width: calc(var(--hs) * 11.6); max-width: 100%; margin-inline: auto; }
+  .hero2__row--1 { justify-content: flex-start; gap: 0.3em; }
+  .hero2__push { margin: 0; }
+  .hero2__row--2 { text-align: left; padding-left: calc(var(--hs) * 3.3); }
+  .hero2__row--3 { padding-left: calc(var(--hs) * 1.4); }
+  .hero2__row--4 { padding-left: calc(var(--hs) * 4.4); }
+}
+@media (min-width: 1101px) {
+  .hero2 .hero2__aside {
+    top: 0;
+    right: 0;
+    width: calc(var(--hs) * 4);
+    height: calc(var(--hs) * 0.74 * 1.12 * 2);
+    min-height: 0;
+  }
+}
+@media (max-width: 600px) {
+  .hero2__row--3, .hero2__row--4 { font-size: 1.1em; }
+  .hero2__row--4 { padding-left: 8%; }
+  .hero2__avatar { width: 1.3em; height: 1.3em; }
+}
