@@ -2735,3 +2735,24 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
 @media (max-width: 600px) {
   #offers-title { font-size: calc(clamp(1.9rem, 8.4vw, 3.4rem) * 0.92); line-height: 1.05; }
 }
+
+/* --- Hero : titre resserré et centré (ordinateur) --- */
+@media (min-width: 1101px) {
+  .hero2__stage {
+    width: calc(var(--hs) * 12.2);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+  .hero2__row--1 { justify-content: flex-start; gap: 0.45em; }
+  .hero2__push { margin: 0; }
+  .hero2__row--2 { text-align: right; padding-left: 0; }
+  .hero2__row--3 { padding-left: 3.2em; }
+  .hero2__row--4 { padding-left: 1.2em; }
+  .hero2 .hero2__aside {
+    top: calc(var(--hs) * 1.04 * 3 + var(--hs) * 0.08);
+    right: 0;
+    width: calc(var(--hs) * 5.2);
+    height: auto;
+    min-height: calc(var(--hs) * 1.04);
+  }
+}
