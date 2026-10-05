@@ -909,13 +909,11 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 
 @media (max-width: 1100px) {
   .hero2 { --hs: clamp(2.6rem, 7.2vw, 6rem); }
-  .hero2__thread { opacity: 0.45; }
   .hero2__aside {
     position: relative;
     top: auto;
     right: auto;
     z-index: 1;
-    background: var(--paper);
     padding: 6px 0;
     height: auto;
     width: auto;

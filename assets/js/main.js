@@ -408,10 +408,15 @@
       var xs = [0.16, 0.84, 0.3, 0.9, 0.08, 0.66, 0.2, 0.88, 0.42, 0.94, 0.12];
       var step = Math.max(560, Math.min(900, window.innerHeight * 0.9));
       var k = 0;
+      // direction de fin de la ligne du hero (dernier segment : 380,780 → 420,1000 dans son dessin)
+      var tdx = 40 * hb.w / 1000, tdy = 220 * hb.h / 1000;
       while (y < H - 10) {
         var ny = Math.min(H + 20, y + step);
         var nx = W * xs[k % xs.length];
-        d += " C" + f(x) + "," + f(y + (ny - y) * 0.55) + " " + f(nx) + "," + f(ny - (ny - y) * 0.55) + " " + f(nx) + "," + f(ny);
+        var lead = (ny - y) * 0.55;
+        // le premier segment part dans le prolongement exact de la ligne du hero
+        var c1x = k === 0 ? x + tdx * (lead / tdy) : x;
+        d += " C" + f(c1x) + "," + f(y + lead) + " " + f(nx) + "," + f(ny - (ny - y) * 0.55) + " " + f(nx) + "," + f(ny);
         if (k % 3 === 1 && ny < H - 160) {
           var r = 26 + (k % 2) * 10, dir = nx > W / 2 ? -1 : 1;
           d += " C" + f(nx) + "," + f(ny + r * 0.9) + " " + f(nx + dir * r * 1.3) + "," + f(ny + r * 0.6) + " " + f(nx + dir * r * 1.1) + "," + f(ny - r * 0.3);
