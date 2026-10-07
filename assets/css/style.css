@@ -1706,16 +1706,6 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   font-style: italic;
   transform: rotate(-6deg);
 }
-.about__label--consulting { right: -70px; left: auto; }
-.about-hero__photo .about__label--second {
-  top: 12%;
-  right: -42px;
-  bottom: auto;
-  left: auto;
-  max-width: 210px;
-  text-align: center;
-  transform: rotate(5deg);
-}
 .about__photo .doodle.arrow { width: 70px; height: 70px; left: -6px; bottom: -84px; color: var(--ink); }
 .about__annot {
   position: absolute;
@@ -1822,7 +1812,22 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .booking__head .eyebrow { margin-bottom: 24px; }
 .booking__title { font-size: calc(clamp(2.2rem, 6.5vw, 7rem) * 0.92); }
 .booking__title--about { font-size: calc(clamp(2.2rem, 5.5vw, 5.5rem) * 0.92); line-height: 1.15; }
-.booking__title em { display: inline-block; }
+.booking__title-main {
+  display: block;
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  white-space: normal;
+  text-wrap: balance;
+}
+.booking__title--about strong {
+  display: block;
+  margin-top: clamp(16px, 2vw, 28px);
+  font-family: var(--font-accent);
+  font-size: 1.08em;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-ink);
+}
 .booking__sub {
   font-family: var(--font-editorial);
   font-size: clamp(1.15rem, 0.9vw + 0.9rem, 1.6rem);
@@ -2173,6 +2178,11 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .about-hero__photo { position: relative; max-width: 460px; justify-self: end; width: 100%; grid-column: auto; grid-row: auto; margin-top: 0; }
 .about-hero__grid .page-hero__title { font-size: calc(clamp(3.2rem, 8vw, 8.5rem) * 0.92); line-height: 1.15; }
 .about-hero__grid .page-hero__title .line--2 { padding-left: 0; }
+.about-page-title { display: flex; flex-direction: column; align-items: flex-start; }
+.about-page-title__line--1 { margin-left: 0; }
+.about-page-title__line--2 { margin-left: clamp(2rem, 10vw, 9rem); font-size: 1em; line-height: 1; }
+.about-page-title__line--3 { margin-top: clamp(0.45rem, 1.2vw, 0.9rem); margin-left: clamp(5rem, 22vw, 20rem); line-height: 1.5; }
+.title-punctuation { margin-left: 0.08em; }
 
 /* ==========================================================================
    Responsive
