@@ -70,6 +70,9 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   overflow-x: clip;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 img, svg, video { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -767,6 +770,22 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   line-height: 1.04;
   letter-spacing: -0.02em;
 }
+.hero2__title [data-tw="evidence"] {
+  font-size: 1.35em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.hero2__title [data-tw="esprit"],
+.hero2__title [data-tw="bonnes"] {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+.hero2__title [data-tw="personnes"] {
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--accent);
+}
 .hero2__title em {
   font-family: var(--font-editorial);
   font-style: italic;
@@ -778,7 +797,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .hero2__push { margin-left: auto; margin-right: 4%; display: inline-flex; align-items: center; gap: 0.18em; }
 .hero2__row--2 { text-align: right; }
 .hero2__row--3 { padding-left: 13%; }
-.hero2__row--4 { padding-left: 46%; color: var(--accent); }
+.hero2__row--4 { padding-left: 46%; }
 .hero2__avatar {
   display: inline-block;
   flex: none;
@@ -966,11 +985,11 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 }
 .ticker__list li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   min-width: clamp(220px, 24vw, 440px);
-  min-height: clamp(140px, 13vw, 220px);
-  padding: clamp(14px, 1.4vw, 22px) clamp(24px, 3vw, 44px);
+  min-height: clamp(108px, 10vw, 150px);
+  padding: clamp(12px, 1.2vw, 18px) clamp(24px, 3vw, 44px);
   background: var(--card);
   border: 1.5px solid var(--ink);
   border-radius: clamp(18px, 1.8vw, 28px);
@@ -990,9 +1009,10 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
    ========================================================================== */
 .offers-head {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 80px);
-  align-items: end;
+  grid-template-columns: 1fr;
+  gap: 0;
+  justify-items: center;
+  text-align: center;
   margin-bottom: clamp(48px, 7vw, 110px);
 }
 
@@ -1072,11 +1092,15 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   font-synthesis: none;
   font-variation-settings: "SOFT" 100, "WONK" 1;
   font-size: clamp(2.6rem, 5.4vw, 5.6rem);
-  line-height: 0.9;
+  line-height: 4;
   letter-spacing: -0.03em;
   margin-bottom: 20px;
 }
-.offer__title em { font-family: var(--font-editorial); font-weight: 400; font-style: italic; }
+.offer__title em {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-style: italic;
+}
 .offer__promise {
   font-family: var(--font-editorial);
   font-size: clamp(1.15rem, 0.7vw + 0.95rem, 1.5rem);
@@ -1652,7 +1676,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .about__title .line--2, .about__title .line--3 { padding-left: clamp(0px, 10vw, 180px); }
 .about__title .line--2 { font-family: var(--font-editorial); font-style: italic; font-weight: 400; letter-spacing: -0.03em; }
 .about__photo {
-  grid-column: 8 / span 5;
+  grid-column: 1 / span 5;
   grid-row: 1 / span 2;
   position: relative;
   margin-top: 20px;
@@ -1682,7 +1706,16 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   font-style: italic;
   transform: rotate(-6deg);
 }
-.about__photo .doodle.sun { width: 110px; height: 110px; top: -40px; right: -24px; color: var(--accent); z-index: 2; }
+.about__label--consulting { right: -70px; left: auto; }
+.about-hero__photo .about__label--second {
+  top: 12%;
+  right: -42px;
+  bottom: auto;
+  left: auto;
+  max-width: 210px;
+  text-align: center;
+  transform: rotate(5deg);
+}
 .about__photo .doodle.arrow { width: 70px; height: 70px; left: -6px; bottom: -84px; color: var(--ink); }
 .about__annot {
   position: absolute;
@@ -2188,7 +2221,12 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   .principle--3 { margin-top: 0; }
 
   .about { display: flex; flex-direction: column; gap: 40px; }
-  .about__photo { width: min(100%, 440px); align-self: flex-end; margin-top: 0; }
+  .about__photo {
+    width: min(100%, 440px);
+    align-self: center;
+    margin-inline: auto;
+    margin-top: 0;
+  }
   .about__label { left: -12px; }
   .about__photo { margin-bottom: 90px; }
 
@@ -2261,8 +2299,9 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 main p,
 .footer__pitch {
   text-align: justify;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 /* Textes qui doivent rester centrés */
@@ -2278,7 +2317,7 @@ main p,
 /* ==========================================================================
    Offres (home) : nouveaux contenus
    ========================================================================== */
-.offer .offer__title { font-size: calc(clamp(2.2rem, 3.4vw, 3.7rem) * 0.92); line-height: 0.98; }
+.offer .offer__title { font-size: calc(clamp(2.2rem, 3.4vw, 3.7rem) * 0.92); line-height: 1.1; }
 .offer__lede {
   font-family: var(--font-editorial);
   font-style: italic;
@@ -2546,6 +2585,10 @@ main p,
   letter-spacing: -0.015em;
   margin-bottom: 16px;
 }
+.creed__title-line {
+  display: block;
+  white-space: nowrap;
+}
 .creed__title em { display: block; font-weight: 400; font-style: italic; }
 .creed__text p { color: var(--muted); line-height: 1.65; }
 .creed__text p + p { margin-top: 10px; }
@@ -2583,12 +2626,11 @@ main p,
    Retours 05/10
    ========================================================================== */
 
-/* --- Hero : seuls « bonnes personnes » sont en gras --- */
+/* --- La phrase principale reste au même niveau que « Deviens » --- */
 .hero2__title strong {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-weight: inherit;
+  font-style: inherit;
+  letter-spacing: inherit;
 }
 
 /* --- Trait fin : statique, en arrière-plan (derrière les cartes et les textes) --- */
@@ -2645,9 +2687,9 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   .proof__fig { font-size: clamp(1.4rem, 4vh, 2.8rem); }
   .hero2 .ticker { margin-top: clamp(16px, 3vh, 40px); }
   .hero2 .ticker__list li {
-    min-height: clamp(120px, 15vh, 220px);
+    min-height: clamp(100px, 13vh, 150px);
     font-size: clamp(1.45rem, 3.5vh, 3rem);
-    padding-block: clamp(10px, 1.6vh, 20px);
+    padding-block: clamp(8px, 1.2vh, 14px);
   }
 }
 @media (min-width: 1101px) and (min-height: 540px) {
@@ -2766,8 +2808,8 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   }
 }
 
-/* --- Hero : « des bonnes personnes » devient le texte principal --- */
-.hero2__row--1, .hero2__row--2 {
+/* --- Hero : « des bonnes personnes » reste au même niveau que « Deviens » --- */
+.hero2__row--1, .hero2__row--2, .hero2__row--3, .hero2__row--4 {
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: 400;
@@ -2775,17 +2817,9 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   letter-spacing: -0.03em;
   line-height: 1.12;
 }
-.hero2__row--3, .hero2__row--4 {
-  font-size: 1.22em;
-  line-height: 0.98;
+.hero2__row--3 {
+  margin-top: 0.16em;
 }
-.hero2__title strong {
-  font-family: var(--font-accent);
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.hero2__row--3 { margin-top: 0.16em; }
 .hero2__avatar { width: 1.8em; height: 1.8em; }
 /* Mise en page : chapeau en italique + parenthèse en haut, grand titre en dessous */
 @media (min-width: 768px) {
@@ -2806,7 +2840,6 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   }
 }
 @media (max-width: 600px) {
-  .hero2__row--3, .hero2__row--4 { font-size: 1.1em; }
   .hero2__row--4 { padding-left: 8%; }
   .hero2__avatar { width: 1.55em; height: 1.55em; }
 }
