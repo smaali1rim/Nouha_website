@@ -129,45 +129,34 @@
   var calendlyLoaded = false;
   var widgets = document.querySelectorAll(".calendly-inline-widget");
 
-  function markLoaded(widget) {
-    if (widget.querySelector("iframe")) widget.classList.add("is-loaded");
-  }
-
+  // Intégration directe en iframe (sans le script widget.js de Calendly) :
+  // rien à bloquer pour les bloqueurs de pub, hauteur fixe et défilement
+  // à l'intérieur du cadre, donc aucune étape (créneaux, formulaire) n'est coupée.
   function loadCalendly() {
     if (calendlyLoaded || !widgets.length) return;
     calendlyLoaded = true;
 
     widgets.forEach(function (widget) {
-      new MutationObserver(function () { markLoaded(widget); })
-        .observe(widget, { childList: true, subtree: true });
-    });
+      var url;
+      try { url = new URL(widget.getAttribute("data-url")); } catch (e) { return; }
+      url.searchParams.set("embed_domain", window.location.host || "localhost");
+      url.searchParams.set("embed_type", "Inline");
 
-    var s = document.createElement("script");
-    s.src = "https://assets.calendly.com/assets/external/widget.js";
-    s.async = true;
-    s.onload = function () {
-      // Le script initialise les widgets présents ; filet de sécurité sinon.
+      var frame = document.createElement("iframe");
+      frame.src = url.toString();
+      frame.title = "Prendre rendez-vous avec Nouha Smaali (Calendly)";
+      frame.setAttribute("frameborder", "0");
+      frame.setAttribute("allow", "payment");
+      frame.addEventListener("load", function () { widget.classList.add("is-loaded"); });
+      widget.appendChild(frame);
+
+      // si rien ne s'affiche au bout de 15 s, on propose le lien direct
       setTimeout(function () {
-        widgets.forEach(function (widget) {
-          if (!widget.querySelector("iframe") && window.Calendly) {
-            window.Calendly.initInlineWidget({
-              url: widget.getAttribute("data-url"),
-              parentElement: widget,
-              resize: true
-            });
-          }
-        });
-      }, 400);
-    };
-    s.onerror = function () {
-      widgets.forEach(function (widget) {
+        if (widget.classList.contains("is-loaded")) return;
         var p = widget.querySelector(".calendly-placeholder p");
-        if (p) p.textContent = "Le calendrier n'a pas pu se charger. Utilise le lien ci-dessous pour réserver.";
-        var loader = widget.querySelector(".loader");
-        if (loader) loader.remove();
-      });
-    };
-    document.body.appendChild(s);
+        if (p) p.textContent = "Le calendrier met du temps à charger. Tu peux aussi réserver avec le lien ci-dessous.";
+      }, 15000);
+    });
   }
 
   if (widgets.length) {
