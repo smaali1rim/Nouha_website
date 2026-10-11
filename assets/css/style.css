@@ -1094,6 +1094,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   font-size: clamp(2.6rem, 5.4vw, 5.6rem);
   line-height: 4;
   letter-spacing: -0.03em;
+  text-align: justify;
   margin-bottom: 20px;
 }
 .offer__title em {
