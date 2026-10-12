@@ -2908,6 +2908,11 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   background: transparent;
 }
 
-/* --- Calendly : la hauteur suit le contenu (pleine largeur conservée) --- */
+/* --- Calendly : fenêtre compacte (même format qu'en mobile), centrée --- */
+.calendly-shell {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+}
 .calendly-inline-widget.is-sized { transition: height 0.35s var(--ease); }
 .calendly-inline-widget.is-sized iframe { overflow: hidden; }
