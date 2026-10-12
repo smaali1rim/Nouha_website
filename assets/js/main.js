@@ -142,6 +142,20 @@
       url.searchParams.set("embed_domain", window.location.host || "localhost");
       url.searchParams.set("embed_type", "Inline");
 
+      // Grand écran (Calendly en 2 colonnes) : pas de fenêtre crème autour,
+      // le fond de Calendly prend la couleur de la section pour que sa carte
+      // blanche soit posée directement sur la page, sans espace vide visible.
+      var shell = widget.closest(".calendly-shell");
+      var section = widget.closest("section");
+      if (shell && section && widget.clientWidth >= 1040) {
+        var rgb = (getComputedStyle(section).backgroundColor.match(/\d+/g) || []).slice(0, 3);
+        if (rgb.length === 3) {
+          var hex = rgb.map(function (n) { return ("0" + (+n).toString(16)).slice(-2); }).join("");
+          url.searchParams.set("background_color", hex);
+          shell.classList.add("calendly-shell--bare");
+        }
+      }
+
       var frame = document.createElement("iframe");
       frame.src = url.toString();
       frame.title = "Prendre rendez-vous avec Nouha Smaali (Calendly)";
