@@ -2265,6 +2265,12 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 }
 
 @media (max-width: 600px) {
+  .about__label--secondary {
+    top: auto;
+    right: -12px;
+    bottom: calc(12% + 50px);
+    left: auto;
+  }
   .hero2 .ticker { margin-top: 20px; }
   .hero2 .ticker__list { gap: 8px; }
   .hero2 .ticker__list li {
