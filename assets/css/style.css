@@ -1676,11 +1676,17 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .about__title .line { display: block; }
 .about__title .line--2, .about__title .line--3 { padding-left: clamp(0px, 10vw, 180px); }
 .about__title .line--2 { font-family: var(--font-editorial); font-style: italic; font-weight: 400; letter-spacing: -0.03em; }
-.about__photo {
+.about > .about__photo {
   grid-column: 8 / span 5;
   grid-row: 1 / span 2;
   position: relative;
   margin-top: 20px;
+  transform: translate(-34px, 100px);
+}
+@media (min-width: 901px) {
+  .js .about > .about__photo[data-reveal].is-visible {
+    transform: translate(-34px, 80px);
+  }
 }
 .about__frame {
   position: relative;
@@ -1810,7 +1816,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 /* ==========================================================================
    Rendez-vous / Calendly
    ========================================================================== */
-.booking { background: var(--accent); color: var(--accent-ink); overflow: hidden; }
+.booking { background: var(--ink); color: var(--accent-ink); overflow: hidden; }
 .booking__head {
   text-align: center;
   max-width: 980px;
@@ -1837,11 +1843,23 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   color: var(--accent-ink);
 }
 .booking__sub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 24px);
   font-family: var(--font-editorial);
   font-size: clamp(1.15rem, 0.9vw + 0.9rem, 1.6rem);
   line-height: 1.4;
-  max-width: 40ch;
+  max-width: 52rem;
   margin: 28px auto 0;
+}
+.booking__sub > span:nth-child(2) { max-width: 40ch; }
+.booking__paren {
+  flex: none;
+  font-family: var(--font-editorial);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 0.8;
 }
 .slots {
   display: inline-flex;
@@ -1884,7 +1902,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .calendly-shell__bar i:nth-child(2) { background: var(--ochre); }
 .calendly-shell__bar i:nth-child(3) { background: var(--slate); }
 .calendly-shell__bar span { margin-left: 10px; }
-.calendly-inline-widget { min-width: 320px; height: 760px; position: relative; }
+.calendly-inline-widget { min-width: 320px; height: 700px; position: relative; }
 .calendly-placeholder {
   position: absolute;
   inset: 0;
@@ -1911,7 +1929,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
    Footer
    ========================================================================== */
 .site-footer {
-  background: var(--ink);
+  background: var(--accent);
   color: var(--paper);
   padding-top: clamp(64px, 8vw, 120px);
   padding-bottom: 32px;
@@ -2244,10 +2262,15 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
     align-self: center;
     margin-inline: auto;
     margin-top: 0;
+    margin-bottom: 0;
+  }
+  .about > .about__photo {
+    align-self: flex-start;
+    margin: 24px 0 0;
+    transform: none;
   }
   .about__label { left: -12px; }
   .about__label--secondary { right: -12px; left: auto; }
-  .about__photo { margin-bottom: 90px; }
 
   .page-hero__grid, .split, .about-hero__grid { grid-template-columns: minmax(0, 1fr); }
   .split__aside { position: static; }
@@ -2274,7 +2297,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   .hero2 .ticker { margin-top: 20px; }
   .hero2 .ticker__list { gap: 8px; }
   .hero2 .ticker__list li {
-    min-width: 100px;
+    min-width: 190px;
     min-height: 72px;
     padding: 8px 16px;
     font-size: clamp(1.7rem, 7vw, 2.4rem);
