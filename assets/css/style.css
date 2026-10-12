@@ -2911,3 +2911,12 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
 /* --- Calendly : la hauteur suit le contenu (pleine largeur conservée) --- */
 .calendly-inline-widget.is-sized { transition: height 0.35s var(--ease); }
 .calendly-inline-widget.is-sized iframe { overflow: hidden; }
+
+/* Grand écran : la carte Calendly est posée directement sur la section */
+.calendly-shell--bare {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+.calendly-shell--bare .calendly-shell__bar { display: none; }
