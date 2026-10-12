@@ -2931,29 +2931,11 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   background: transparent;
 }
 
-/* --- Calendly : la hauteur suit le contenu (pleine largeur conservée) --- */
+/* --- Calendly : fenêtre compacte (même format qu'en mobile), centrée --- */
+.calendly-shell {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+}
 .calendly-inline-widget.is-sized { transition: height 0.35s var(--ease); }
 .calendly-inline-widget.is-sized iframe { overflow: hidden; }
-
-/* Grand écran : la carte Calendly est posée directement sur la section */
-.calendly-shell--bare {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  border-radius: 0;
-}
-/* …avec l'en-tête « Choisis ton créneau » en pastille centrée au-dessus de la carte */
-.calendly-shell--bare { overflow: visible; }
-.calendly-shell--bare .calendly-shell__bar {
-  position: relative;
-  z-index: 2;
-  width: fit-content;
-  margin: 0 auto -28px;   /* se glisse dans la marge haute de Calendly, près de la carte */
-  padding: 10px 20px 10px 16px;
-  background: var(--paper);
-  color: var(--ink);
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 4px 4px 0 var(--ink);
-  pointer-events: none;
-}
