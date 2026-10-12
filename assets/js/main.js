@@ -159,6 +159,23 @@
     });
   }
 
+  // Calendly envoie la hauteur de sa page : le cadre prend exactement cette
+  // hauteur (pas de vide, pas de défilement interne), à chaque étape.
+  window.addEventListener("message", function (e) {
+    if (!/^https:\/\/([a-z0-9-]+\.)?calendly\.com$/.test(e.origin)) return;
+    var data = e.data;
+    if (!data || data.event !== "calendly.page_height" || !data.payload) return;
+    var h = parseInt(data.payload.height, 10);
+    if (!h || h < 300) return;
+    widgets.forEach(function (widget) {
+      var frame = widget.querySelector("iframe");
+      if (frame && frame.contentWindow === e.source) {
+        widget.style.height = h + "px";
+        widget.classList.add("is-sized");
+      }
+    });
+  });
+
   if (widgets.length) {
     if ("IntersectionObserver" in window) {
       var cio = new IntersectionObserver(function (entries) {
