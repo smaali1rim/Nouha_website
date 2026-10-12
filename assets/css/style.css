@@ -2919,4 +2919,18 @@ main > section:first-child { padding-bottom: calc(var(--sheet-r) + clamp(28px, 4
   box-shadow: none;
   border-radius: 0;
 }
-.calendly-shell--bare .calendly-shell__bar { display: none; }
+/* …avec l'en-tête « Choisis ton créneau » en pastille centrée au-dessus de la carte */
+.calendly-shell--bare { overflow: visible; }
+.calendly-shell--bare .calendly-shell__bar {
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  margin: 0 auto -28px;   /* se glisse dans la marge haute de Calendly, près de la carte */
+  padding: 10px 20px 10px 16px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--ink);
+  pointer-events: none;
+}
