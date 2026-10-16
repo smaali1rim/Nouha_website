@@ -1094,7 +1094,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   font-size: clamp(2.6rem, 5.4vw, 5.6rem);
   line-height: 4;
   letter-spacing: -0.03em;
-  text-align: justify;
+  text-align: left;
   margin-bottom: 20px;
 }
 .offer__title em {
@@ -2202,6 +2202,9 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   align-items: center;
 }
 .about-hero__photo { position: relative; max-width: 460px; justify-self: end; width: 100%; grid-column: auto; grid-row: auto; margin-top: 0; }
+@media (min-width: 901px) {
+  .about-hero__photo { margin-right: clamp(0px, 2vw, 24px); }
+}
 .about-hero__grid .page-hero__title { font-size: calc(clamp(3.2rem, 8vw, 8.5rem) * 0.92); line-height: 1.15; }
 .about-hero__grid .page-hero__title .line--2 { padding-left: 0; }
 .about-page-title { display: flex; flex-direction: column; align-items: flex-start; }
