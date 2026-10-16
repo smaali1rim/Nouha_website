@@ -1853,7 +1853,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   max-width: 52rem;
   margin: 28px auto 0;
 }
-.booking__sub > span:nth-child(2) { max-width: 40ch; text-align: center; }
+.booking__sub > span:nth-child(2) { max-width: 40ch; text-align: justify; }
 .booking__paren {
   flex: none;
   font-family: var(--font-editorial);
@@ -1877,7 +1877,7 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
 .slots__dots { display: inline-flex; gap: 6px; }
 .slots__dots i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--ink); }
 .booking__head .doodle.star-a { width: 64px; height: 64px; left: 0; top: 30%; fill: var(--paper); stroke: none; }
-.booking__head .doodle.star-b { width: 38px; height: 38px; right: 4%; top: 8%; fill: var(--ink); stroke: none; }
+.booking__head .doodle.star-b { width: 30px; height: 30px; right: 0; top: 50%; fill: var(--ochre); stroke: none; }
 
 .calendly-shell {
   background: var(--paper);
