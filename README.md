@@ -10,6 +10,7 @@ Site vitrine statique (HTML / CSS / JavaScript, sans dépendance ni build).
 | `accompagnement-construire.html` | Page détaillée « Construire ton média » (+ son propre Calendly) |
 | `accompagnement-transformer.html` | Page détaillée « Transformer ton média » (+ son propre Calendly) |
 | `a-propos.html` | Page « Un peu plus sur moi » (+ Calendly) |
+| `mentions-legales.html` | Mentions légales |
 
 ## Voir le site en local
 

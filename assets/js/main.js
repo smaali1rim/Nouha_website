@@ -5,6 +5,13 @@
   var root = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Photos des témoignages : conserver les initiales si la photo est absente. */
+  document.querySelectorAll("[data-avatar-photo]").forEach(function (photo) {
+    function showInitials() { photo.hidden = true; }
+    photo.addEventListener("error", showInitials);
+    if (photo.complete && photo.naturalWidth === 0) showInitials();
+  });
+
   /* ------------------------------------------------------------------
      Scroll fluide vers une ancre de la page
      ------------------------------------------------------------------ */

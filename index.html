@@ -57,7 +57,7 @@
         <img class="menu__photo" src="assets/img/menu-portrait.jpg" alt="Portrait de Nouha Smaali" width="280" height="280" loading="lazy">
         <ul class="socials socials--menu" aria-label="Réseaux">
           <li><a href="https://substack.com/@nouhasmaali" target="_blank" rel="noopener" aria-label="Substack"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.84h21.08V0z"/></svg></a></li>
-          <li><a href="mailto:bonjour@nouhasmaali.com" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 6.6A2.6 2.6 0 0 1 4.6 4h14.8A2.6 2.6 0 0 1 22 6.6v.5l-10 6.3L2 7.1zM2 9.5v7.9A2.6 2.6 0 0 0 4.6 20h14.8a2.6 2.6 0 0 0 2.6-2.6V9.5l-10 6.3z"/></svg></a></li>
+          <li><a href="mailto:hello@nouhasmaali.com" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 6.6A2.6 2.6 0 0 1 4.6 4h14.8A2.6 2.6 0 0 1 22 6.6v.5l-10 6.3L2 7.1zM2 9.5v7.9A2.6 2.6 0 0 0 4.6 20h14.8a2.6 2.6 0 0 0 2.6-2.6V9.5l-10 6.3z"/></svg></a></li>
           <li><a href="https://www.linkedin.com/in/nouhasmaali/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
         </ul>
       </aside>
@@ -219,9 +219,7 @@
       </div>
     </section>
 
-    <!-- ============ Témoignages ============
-         Les contenus ci-dessous sont des EXEMPLES à remplacer par de vrais retours clients
-         (textes, captures, fichiers audio dans assets/media/, vidéos). -->
+    <!-- ============ Témoignages ============ -->
     <section class="section voices" id="retours" aria-labelledby="voices-title">
       <div class="container">
         <div class="voices__wall">
@@ -232,114 +230,57 @@
             <svg class="doodle loop" viewBox="0 0 110 70" aria-hidden="true"><path pathLength="1" d="M4 40c20 10 40 6 44-10S30 4 24 20s24 36 50 30 30-20 32-30"/></svg>
           </div>
 
-          <!-- Capture de message -->
-          <figure class="v-obj v-msg-1 shot tape" data-reveal>
-            <div class="shot__head">
-              <span class="avatar" aria-hidden="true">CM</span>
-              <div><div class="shot__name">Claire M.</div><div class="shot__meta">Coach indépendante</div></div>
-              <span class="shot__app">LinkedIn</span>
-            </div>
-            <div class="bubbles">
-              <p class="bubble">Nouha, je voulais te dire&nbsp;: 3 mois après notre accompagnement, ma newsletter a passé les 1&nbsp;200 abonnés 🥹</p>
-              <p class="bubble bubble--react">Et surtout, deux clients sont arrivés directement grâce à mes posts Substack.</p>
-              <p class="bubble bubble--me">Je suis tellement contente pour toi&nbsp;! Tu l'as construit, ce média 🧡</p>
-            </div>
-            <figcaption class="sr-only">Capture d'un message de Claire M., coach indépendante</figcaption>
-          </figure>
+          <div class="voices__cards">
 
-          <!-- Audio -->
-          <div class="v-obj v-audio-1 audio" data-audio data-seed="11" data-duration="12" data-reveal style="--delay:.1s">
-            <div class="audio__label"><span class="live">Message vocal</span><span>WhatsApp</span></div>
-            <div class="audio__row">
-              <button class="audio__play" type="button" aria-label="Écouter le message vocal de Julien R.">
-                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
-                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-              </button>
-              <div class="audio__wave" role="slider" tabindex="0" aria-label="Progression de la lecture" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
-              <span class="audio__time">0:00 / 0:12</span>
-            </div>
-            <audio preload="metadata" src="assets/media/temoignage-audio-1.wav"></audio>
-            <div class="cite"><span class="avatar avatar--sage" aria-hidden="true">JR</span><div><strong>Julien R.</strong><span>Consultant indépendant</span></div></div>
-          </div>
+            <figure class="v-obj testimonial testimonial--diagnostic tape" data-reveal>
+              <h3 class="testimonial__title">Diagnostic avec Nouha</h3>
+              <blockquote class="testimonial__quote">
+                <p>Un grand merci à Nouha pour son diagnostic précis, ses conseils ciblés et surtout pour le temps qu’elle a pris pour tout m’expliquer… et pour discuter aussi hahaha ! ❤️</p>
+                <p>Je suis vraiment contente d’avoir fait cette réunion avec elle et je compte bien appliquer ses conseils comme convenu !</p>
+              </blockquote>
+              <figcaption class="testimonial__author"><span class="avatar avatar--blush" aria-hidden="true">C<img data-avatar-photo src="assets/img/chiraz.jpg" alt="" width="36" height="36" loading="lazy"></span><span>Chiraz</span></figcaption>
+            </figure>
 
-          <!-- Témoignage écrit -->
-          <figure class="v-obj v-quote-1 quote-card" data-reveal style="--delay:.2s">
-            <blockquote>Nouha a mis des mots sur ce que je n'arrivais pas à formuler. Ma ligne éditoriale est enfin claire — et je prends du plaisir à écrire chaque semaine.</blockquote>
-            <figcaption class="cite"><span class="avatar avatar--blush" aria-hidden="true">SL</span><div><strong>Sarah L.</strong><span>Coach &amp; formatrice</span></div></figcaption>
-          </figure>
+            <figure class="v-obj testimonial testimonial--perspective" data-reveal style="--delay:.1s">
+              <blockquote class="testimonial__quote">
+                <p>Elle m’a aussi ouvert les yeux sur certaines choses qui semblent pourtant évidentes mais auxquelles je n’avais pas forcément prêté attention ou auxquelles je n’avais pas accordé suffisamment d’importance… alors qu’elles sont primordiales !</p>
+              </blockquote>
+              <figcaption class="testimonial__author"><span class="avatar avatar--blush" aria-hidden="true">C<img data-avatar-photo src="assets/img/chiraz.jpg" alt="" width="36" height="36" loading="lazy"></span><span>Chiraz</span></figcaption>
+            </figure>
 
-          <!-- Vidéo -->
-          <div class="v-obj v-video-1" data-reveal>
-            <button class="video-thumb" type="button" data-video="assets/media/temoignage-video.webm" data-portrait data-title="Amélie, fondatrice d'agence — témoignage vidéo">
-              <img src="assets/img/poster-1.png" alt="" loading="lazy">
-              <span class="video-thumb__dur">1:12</span>
-              <svg class="video-thumb__ring spin" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="ring-1" d="M60 60m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text><textPath href="#ring-1" textLength="310" lengthAdjust="spacing">Voir la vidéo ✺ voir la vidéo ✺</textPath></text></svg>
-              <span class="video-thumb__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
-              <span class="video-thumb__cap"><strong>« J'ai enfin un média qui me ressemble »</strong>Amélie, fondatrice d'agence</span>
-              <span class="sr-only">Lire le témoignage vidéo d'Amélie</span>
-            </button>
-          </div>
+            <figure class="v-obj testimonial testimonial--strategy" data-reveal style="--delay:.1s">
+              <h3 class="testimonial__title">Une experte média généreuse avec des conseils concrets et applicables</h3>
+              <blockquote class="testimonial__quote">
+                <p>J’ai eu la chance et le plaisir d’échanger avec Nouha sur ma stratégie Substack et les évolutions à apporter à mon média “Pouvoir intérieur” sur cette plateforme.</p>
+                <p>Nouha est professionnelle, généreuse et très engagée dans ce qu’elle fait. Elle m’a aidé à voir ce que j’avais besoin d’améliorer dans mon média avec <strong>des conseils clairs, précis, et des recommandations super pratiques et concrètes.</strong></p>
+              </blockquote>
+              <figcaption class="testimonial__author"><span class="avatar avatar--sage" aria-hidden="true">AL<img data-avatar-photo src="assets/img/ali-labbabi.jpg" alt="" width="36" height="36" loading="lazy"></span><span>Ali Labbabi</span></figcaption>
+            </figure>
 
-          <!-- Commentaire Substack -->
-          <figure class="v-obj v-comment-1 comment" data-reveal style="--delay:.1s">
-            <div class="comment__head">
-              <span class="avatar avatar--butter" aria-hidden="true">IB</span>
-              <div><div class="shot__name">Inès B.</div><div class="comment__ctx">Commentaire sur « Pourquoi j'ai quitté LinkedIn pour Substack »</div></div>
-            </div>
-            <p>Ce post résume exactement ce que Nouha m'a aidée à comprendre il y a 6 mois. Depuis, je n'écris plus pour l'algorithme mais pour mes lecteurs. Merci&nbsp;🙏</p>
-            <div class="comment__foot">
-              <span class="liked"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.3C1 8 3.4 4.5 7 4.5c2 0 3.6 1.1 5 2.8 1.4-1.7 3-2.8 5-2.8 3.6 0 6 3.5 4.5 7.2C19.5 16.4 12 21 12 21z"/></svg>24</span>
-              <span>Répondre</span>
-              <span>Partager</span>
-            </div>
-          </figure>
+            <figure class="v-obj testimonial testimonial--highlight" data-reveal style="--delay:.1s">
+              <blockquote class="testimonial__quote">
+                <p>Un regard extérieur, professionnel et bienveillant fait toute la différence.</p>
+                <p class="testimonial__aside">😊 Optimiste et reconnaissante ! ❤️</p>
+              </blockquote>
+              <figcaption class="testimonial__author"><span class="avatar avatar--blush" aria-hidden="true">C<img data-avatar-photo src="assets/img/chiraz.jpg" alt="" width="36" height="36" loading="lazy"></span><span>Chiraz</span></figcaption>
+            </figure>
 
-          <!-- Post-it -->
-          <figure class="v-obj v-note note" data-reveal style="--delay:.2s">
-            <blockquote>« Le meilleur investissement que j'ai fait pour mon activité cette année. »</blockquote>
-            <figcaption class="cite"><div><strong>Marc D.</strong><span>Dirigeant de PME</span></div></figcaption>
-          </figure>
+            <figure class="v-obj testimonial testimonial--journey tape" data-reveal style="--delay:.2s">
+              <h3 class="testimonial__title">Expérience apprenante et résultats probants</h3>
+              <blockquote class="testimonial__quote">
+                <p>Nouha crée un cheminement tout au long de 6 semaines qui nous amène à revisiter les fondamentaux de notre média. Elle nous amène à co-construire notre positionnement avec elle et surtout à <strong>confirmer notre différence, notre unicité.</strong></p>
+              </blockquote>
+              <figcaption class="testimonial__author"><span class="avatar avatar--butter" aria-hidden="true">ST<img data-avatar-photo src="assets/img/sophie-trentesaux.jpg" alt="" width="36" height="36" loading="lazy"></span><span>Sophie Trentesaux</span></figcaption>
+            </figure>
 
-          <!-- Audio 2 -->
-          <div class="v-obj v-audio-2 audio" data-audio data-seed="29" data-duration="12" data-reveal>
-            <div class="audio__label"><span class="live">Mémo vocal</span><span>Témoignage</span></div>
-            <div class="audio__row">
-              <button class="audio__play" type="button" aria-label="Écouter le mémo vocal de Léa">
-                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
-                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-              </button>
-              <div class="audio__wave" role="slider" tabindex="0" aria-label="Progression de la lecture" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
-              <span class="audio__time">0:00 / 0:12</span>
-            </div>
-            <audio preload="metadata" src="assets/media/temoignage-audio-2.wav"></audio>
-            <div class="cite"><span class="avatar avatar--blush" aria-hidden="true">LV</span><div><strong>Léa V.</strong><span>Rédactrice freelance</span></div></div>
-          </div>
+            <figure class="v-obj testimonial testimonial--growth" data-reveal style="--delay:.2s">
+              <blockquote class="testimonial__quote">
+                <p>Je suis très content d’avoir bénéficié de son expertise et d’avoir aujourd’hui <strong>une stratégie, clé en main, pour faire grandir mon média et mon business.</strong></p>
+                <p>Merci Nouha !</p>
+              </blockquote>
+              <figcaption class="testimonial__author"><span class="avatar avatar--sage" aria-hidden="true">AL<img data-avatar-photo src="assets/img/ali-labbabi.jpg" alt="" width="36" height="36" loading="lazy"></span><span>Ali Labbabi</span></figcaption>
+            </figure>
 
-          <!-- Capture SMS -->
-          <figure class="v-obj v-msg-2 shot shot--phone tape" data-reveal style="--delay:.1s">
-            <p class="shot__time">Aujourd'hui 09:41</p>
-            <div class="bubbles">
-              <p class="bubble">Premier post payant publié. 14 abonnés payants en 48&nbsp;h 😭</p>
-              <p class="bubble bubble--react">MERCI&nbsp;!!</p>
-            </div>
-            <figcaption class="cite"><span class="avatar avatar--sage" aria-hidden="true">KA</span><div><strong>Karim A.</strong><span>Expert-comptable</span></div></figcaption>
-          </figure>
-
-          <!-- Grand témoignage écrit -->
-          <figure class="v-obj v-quote-2 quote-card quote-card--big" data-reveal>
-            <blockquote>Avant, je publiais partout sans direction. Aujourd'hui, j'ai un média qui me ressemble, une communauté qui me lit — et des prospects qui arrivent déjà convaincus.</blockquote>
-            <figcaption class="cite"><span class="avatar" aria-hidden="true">TG</span><div><strong>Thomas G.</strong><span>Dirigeant, cabinet de conseil</span></div></figcaption>
-          </figure>
-
-          <!-- Vidéo 2 -->
-          <div class="v-obj v-video-2" data-reveal style="--delay:.15s">
-            <button class="video-thumb" type="button" data-video="assets/media/temoignage-video.webm" data-portrait data-title="Nadia, consultante RH — témoignage vidéo">
-              <img src="assets/img/poster-2.png" alt="" loading="lazy">
-              <span class="video-thumb__dur">0:48</span>
-              <span class="video-thumb__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
-              <span class="video-thumb__cap"><strong>« Un regard qui change tout »</strong>Nadia, consultante RH</span>
-              <span class="sr-only">Lire le témoignage vidéo de Nadia</span>
-            </button>
           </div>
 
         </div>
@@ -439,13 +380,14 @@
           <ul>
             <li><a href="https://substack.com/@nouhasmaali" target="_blank" rel="noopener">Substack</a></li>
             <li><a href="https://www.linkedin.com/in/nouhasmaali/" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="mailto:bonjour@nouhasmaali.com">E-mail</a></li>
+            <li><a href="mailto:hello@nouhasmaali.com">E-mail</a></li>
           </ul>
         </div>
       </div>
       <p class="footer__word" aria-hidden="true">Nouha<span>.</span></p>
       <div class="footer__bottom">
         <span>© <span data-year>2026</span> Nouha Smaali — Tous droits réservés</span>
+        <a href="mentions-legales.html">Mentions légales</a>
         <a href="#top">Retour en haut ↑</a>
       </div>
     </div>
