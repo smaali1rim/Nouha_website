@@ -1848,12 +1848,12 @@ section[id], [id].anchor { scroll-margin-top: 24px; }
   justify-content: center;
   gap: clamp(10px, 2vw, 24px);
   font-family: var(--font-editorial);
-  font-size: clamp(1.15rem, 0.9vw + 0.9rem, 1.6rem);
+  font-size: clamp(0.5rem, 0.6vw + 0.6rem, 1rem);
   line-height: 1.4;
   max-width: 52rem;
   margin: 28px auto 0;
 }
-.booking__sub > span:nth-child(2) { max-width: 40ch; }
+.booking__sub > span:nth-child(2) { max-width: 40ch; text-align: center; }
 .booking__paren {
   flex: none;
   font-family: var(--font-editorial);
