@@ -13,7 +13,8 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..800,100,1&family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500;1,7..72,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500;1,7..72,700&display=swap">
+  <link rel="preload" href="assets/fonts/tan-meringue.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="preconnect" href="https://calendly.com">
   <script>document.documentElement.classList.add("js");</script>
@@ -109,7 +110,7 @@
       </div>
 
       <!-- Bande éditoriale : sujets d'intervention -->
-      <div class="ticker" aria-label="Mes sujets d'intervention">
+      <div class="ticker" role="region" aria-label="Mes sujets d'intervention">
         <div class="ticker__track">
           <ul class="ticker__list">
             <li>Positionnement</li>
@@ -309,7 +310,7 @@
           </h2>
 
           <div class="about__photo" data-reveal style="--delay:.15s">
-            <div class="about__frame"><img src="assets/img/poster-2.png" alt="Portrait de Nouha Smaali" loading="lazy"></div>
+            <div class="about__frame"><img src="assets/img/poster-2.webp" alt="Portrait de Nouha Smaali" width="1408" height="736" loading="lazy" decoding="async"></div>
             <span class="about__label">Consultante en stratégie éditoriale &amp; média</span>
             <span class="about__label about__label--secondary">Substack est mon terrain de jeu</span>
           </div>
@@ -406,15 +407,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Modal vidéo -->
-  <dialog class="video-modal" id="video-modal" aria-label="Témoignage vidéo">
-    <button class="video-modal__close" type="button" aria-label="Fermer la vidéo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
-    </button>
-    <div class="video-modal__frame"></div>
-    <p class="video-modal__caption"></p>
-  </dialog>
 
   <script src="assets/js/consent.js" defer></script>
   <script src="assets/js/main.js" defer></script>

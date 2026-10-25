@@ -23,63 +23,48 @@ sur Netlify, Vercel, GitHub Pages, OVH, etc.
 
 ## Typographie
 
-- **TAN Meringue** → accent / signature (grands titres, mots mis en avant). Police
-  commerciale : voir `assets/fonts/README.md` pour l'ajouter. En attendant,
-  Fraunces prend le relais.
+- **TAN Meringue** → accent / signature (grands titres, mots mis en avant).
+  Police auto-hébergée (`assets/fonts/tan-meringue.woff2`), préchargée dans le
+  `<head>` de chaque page.
 - **Literata** → éditorial (titres secondaires, citations, introductions).
 - **Inter** → fonctionnel (texte, navigation, boutons, légendes).
 
 Les couleurs sont définies en variables CSS en haut de `assets/css/style.css`
-(`--paper`, `--ink`, `--accent`, `--blush`, `--butter`…).
+(`--forest`, `--cream`, `--terracotta`, `--slate`, `--ochre`… et leurs alias
+`--paper`, `--ink`, `--accent`, `--blush`, `--butter`).
 
 ## Interactions
 
-- **Tous les boutons « Parlons-en » / « Prendre rendez-vous »** pointent vers
-  `#rendez-vous` : scroll fluide jusqu'au Calendly intégré, sans quitter le site.
-- **Menu burger** plein écran (Échap pour fermer, navigation clavier). Les trois
-  premières entrées défilent vers les sections de la home, « Un peu plus sur moi »
-  ouvre `a-propos.html`.
-- **Calendly** : widget inline officiel, chargé automatiquement à l'approche de la
-  section (lien de secours si le calendrier ne charge pas). URL à modifier dans
-  l'attribut `data-url` de `.calendly-inline-widget`. Les couleurs passées dans
-  l'URL (`background_color`, `primary_color`…) ne s'appliquent qu'avec un plan
-  Calendly payant.
-- **Lecteurs audio** avec play/pause, waveform calculée depuis le fichier,
-  clic/glisser pour avancer, flèches clavier.
-- **Vidéos** : vignette cliquable qui ouvre une modal. Deux options par vignette :
-  - `data-video="assets/media/ma-video.mp4"` pour un fichier hébergé avec le site ;
-  - `data-embed="https://www.youtube.com/embed/ID?autoplay=1"` (ou Vimeo) à la place.
-  - `data-portrait` pour une vidéo verticale.
+- **Tous les boutons « Parlons de ton média » / « Prendre rendez-vous »** pointent
+  vers `#rendez-vous` : scroll fluide jusqu'au Calendly intégré, sans quitter le site.
+- **Menu burger** plein écran (Échap pour fermer, navigation clavier).
+- **Calendly** : iframe directe (sans `widget.js`), chargée à l'approche de la
+  section ; sa hauteur suit celle de la page Calendly (message
+  `calendly.page_height`), donc pas de vide ni de défilement interne. URL à
+  modifier dans l'attribut `data-url` de `.calendly-inline-widget`.
+- **Trait de fond** (home, ≥ 768 px) : la ligne du hero (`#hero-thread`) est
+  prolongée jusqu'au pied de page par `main.js`, un calque SVG par section.
+- **Cookies & Google Analytics 4** (`assets/js/consent.js`) : GA n'est chargé
+  qu'après « Accepter » ; le choix est gardé 6 mois. Tout élément portant
+  `data-cookie-settings` rouvre le bandeau (pied de page, mentions légales).
 
-## À personnaliser avant la mise en ligne
+## Images
 
-1. **Photos** : remplace `assets/img/portrait.svg` (hero + section « moi ») et les
-   vignettes vidéo `assets/img/poster-1.svg` / `poster-2.svg` par de vraies photos
-   (JPG/WebP), puis mets à jour les `src` correspondants.
-2. **Témoignages** (section `#retours` de `index.html`) : les noms, messages,
-   captures, audios et vidéos sont des **exemples fictifs**. Remplace-les par de
-   vrais retours clients (avec leur accord).
-   - Audios : dépose tes fichiers dans `assets/media/` et change le `src` de la
-     balise `<audio>` (mp3 / m4a / wav) et `data-duration`.
-   - Vidéos : voir ci-dessus.
-3. **Liens** : vérifie l'adresse e-mail (`bonjour@nouhasmaali.com`), l'URL
-   Substack (`https://substack.com/@nouhasmaali`) et l'URL LinkedIn — elles sont
-   présentes dans le menu et le pied de page de chaque page.
-4. **Page « Un peu plus sur moi »** : les passages marqués `[À compléter]` et les
-   repères chiffrés `[X]` attendent ton parcours et tes éléments de légitimité.
-5. **Pages accompagnements** : relis les étapes, livrables, format et FAQ pour
-   qu'ils collent exactement à tes offres.
+Photos en WebP (ou JPG pour les petits avatars), dimensionnées pour leur taille
+d'affichage (×2 pour les écrans Retina). Pour en ajouter une : exporte-la en
+WebP qualité ~85, à environ deux fois sa largeur affichée, et renseigne
+`width` / `height` sur la balise `<img>`.
 
 ## Structure
 
 ```
 assets/
-  css/style.css     styles (tokens, composants, responsive)
-  js/main.js        menu, scroll fluide, apparitions, Calendly, audio, modal vidéo
-  fonts/            TAN Meringue (à ajouter)
-  img/              visuels provisoires (SVG)
-  media/            audio & vidéo provisoires
+  css/style.css     styles (tokens, composants, responsive, ajustements)
+  js/main.js        menu, scroll fluide, apparitions, Calendly, trait de fond
+  js/consent.js     bandeau cookies + Google Analytics 4
+  fonts/            TAN Meringue
+  img/              photos (WebP/JPG), icônes
 ```
 
 Les menus, en-têtes et pieds de page sont dupliqués dans chaque fichier HTML :
-une modification de navigation est à reporter sur les 4 pages.
+une modification de navigation est à reporter sur les 5 pages.
