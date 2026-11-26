@@ -213,28 +213,29 @@
   }
 
   /* ------------------------------------------------------------------
-     Carrousel des avis
-     Boucle infinie : les avis sont recopiés avant et après la rangée, et
-     on revient en douce sur les vrais avis à la fin de chaque glissement.
-     Flèches, points, clavier, glisser au doigt, défilement automatique
-     (en pause au survol, au focus, hors écran, onglet caché ou sur demande).
+     Carrousel des avis (façon « coverflow »)
+     La carte active est centrée et en avant ; ses voisines sont réduites et
+     resserrées autour d'elle. Boucle infinie : les avis sont recopiés avant
+     et après la rangée, et on revient en douce sur les vrais avis à la fin
+     de chaque glissement. Flèches, points, clic sur une carte de côté,
+     clavier, glisser au doigt, défilement automatique (en pause au survol,
+     au clavier et hors écran).
      ------------------------------------------------------------------ */
   document.querySelectorAll("[data-carousel]").forEach(function (carousel) {
     var viewport = carousel.querySelector(".carousel__viewport");
     var track = carousel.querySelector(".carousel__track");
     var controls = carousel.querySelector(".carousel__controls");
     var dotsWrap = carousel.querySelector(".carousel__dots");
-    var pauseBtn = carousel.querySelector(".carousel__btn--pause");
     var slides = Array.prototype.slice.call(track.children);
     var n = slides.length;
     var DELAY = 6000;
+    var SIDE_SCALE = 0.84; // taille des cartes de côté
     if (n < 2) return;
 
     function copy(slide) {
       var c = slide.cloneNode(true);
       ["role", "aria-roledescription", "aria-label"].forEach(function (a) { c.removeAttribute(a); });
       c.setAttribute("aria-hidden", "true");
-      c.setAttribute("inert", "");
       c.querySelectorAll("[id]").forEach(function (el) { el.removeAttribute("id"); });
       c.querySelectorAll("[aria-labelledby]").forEach(function (el) { el.removeAttribute("aria-labelledby"); });
       return c;
@@ -242,8 +243,8 @@
     slides.forEach(function (s) { track.appendChild(copy(s)); });
     slides.slice().reverse().forEach(function (s) { track.insertBefore(copy(s), track.firstChild); });
 
-    var all = track.children;   // [copies][vrais avis][copies]
-    var pos = n;                // première carte visible (index dans `all`)
+    var all = Array.prototype.slice.call(track.children); // [copies][vrais avis][copies]
+    var pos = n;                                          // carte au centre (index dans `all`)
 
     var dots = slides.map(function (s, k) {
       var d = document.createElement("button");
@@ -252,8 +253,7 @@
       d.setAttribute("aria-label", "Avis " + (k + 1) + " sur " + n);
       d.addEventListener("click", function () {
         // vers la copie de cet avis la plus proche, pour glisser le moins possible
-        var target = [k, n + k, 2 * n + k].reduce(function (a, b) { return Math.abs(b - pos) < Math.abs(a - pos) ? b : a; });
-        goTo(target);
+        goTo([k, n + k, 2 * n + k].reduce(function (a, b) { return Math.abs(b - pos) < Math.abs(a - pos) ? b : a; }));
         restart();
       });
       dotsWrap.appendChild(d);
@@ -262,11 +262,33 @@
     controls.hidden = false;
     carousel.classList.add("is-ready");
 
+    // décalage de la rangée pour centrer la carte `p` dans l'écran
+    function shift(p) {
+      var slide = all[p];
+      return viewport.clientWidth / 2 - (slide.offsetLeft - all[0].offsetLeft + slide.offsetWidth / 2);
+    }
+
     function render(animate) {
       track.classList.toggle("no-anim", !animate);
-      track.style.transform = "translate3d(" + -(all[pos].offsetLeft - all[0].offsetLeft) + "px,0,0)";
+      track.style.transform = "translate3d(" + shift(pos) + "px,0,0)";
+      // cartes de côté : réduites et rapprochées de la carte active
+      var w = all[0].offsetWidth;
+      var step = all.length > 1 ? all[1].offsetLeft - all[0].offsetLeft : w;
+      var gap = step - w;
+      all.forEach(function (slide, i) {
+        var d = i - pos;
+        var dist = Math.abs(d);
+        var x = 0;
+        if (dist) {
+          var visual = w / 2 + gap + (w * SIDE_SCALE) / 2 + (dist - 1) * (w * SIDE_SCALE + gap);
+          x = (d > 0 ? 1 : -1) * (visual - dist * step);
+        }
+        slide.style.setProperty("--x", x.toFixed(1) + "px");
+        slide.style.setProperty("--s", dist ? SIDE_SCALE : 1);
+        slide.classList.toggle("is-active", !dist);
+      });
       if (!animate) void track.offsetWidth; // applique la position avant de réactiver l'animation
-      var cur = (pos % n + n) % n;
+      var cur = pos % n;
       dots.forEach(function (d, k) {
         if (k === cur) d.setAttribute("aria-current", "true");
         else d.removeAttribute("aria-current");
@@ -276,12 +298,12 @@
     // revient sur les vrais avis (même carte affichée, sans animation)
     function recenter() {
       if (pos >= n && pos < 2 * n) return;
-      pos = (pos % n + n) % n + n;
+      pos = (pos % n) + n;
       render(false);
     }
 
     function goTo(p) {
-      pos = p;
+      pos = Math.max(0, Math.min(all.length - 1, p));
       render(!reduceMotion);
       if (reduceMotion) recenter();
     }
@@ -300,6 +322,17 @@
     carousel.addEventListener("keydown", function (e) {
       if (e.key === "ArrowLeft") { step(-1); restart(); e.preventDefault(); }
       if (e.key === "ArrowRight") { step(1); restart(); e.preventDefault(); }
+    });
+
+    /* Clic sur une carte de côté : elle passe au centre */
+    var lastDrag = 0;
+    viewport.addEventListener("click", function (e) {
+      if (Date.now() - lastDrag < 300) return;
+      var slide = e.target.closest(".carousel__slide");
+      var i = all.indexOf(slide);
+      if (i < 0 || i === pos) return;
+      goTo(i);
+      restart();
     });
 
     /* Glisser au doigt (le défilement vertical de la page reste libre) */
@@ -323,41 +356,31 @@
         try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
         stop();
       }
-      track.style.transform = "translate3d(" + (dx - (all[pos].offsetLeft - all[0].offsetLeft)) + "px,0,0)";
+      track.style.transform = "translate3d(" + (shift(pos) + dx) + "px,0,0)";
     });
     function endDrag() {
       if (startX === null) return;
       startX = null;
       if (!dragging) return;
       dragging = false;
+      lastDrag = Date.now();
       carousel.classList.remove("is-dragging");
       var width = all[1].offsetLeft - all[0].offsetLeft;
       var moved = Math.round(-dx / width);
       if (!moved && Math.abs(dx) > 40) moved = dx < 0 ? 1 : -1;
-      goTo(Math.max(0, Math.min(all.length - 1, pos + moved)));
+      goTo(pos + moved);
       restart();
     }
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
 
     /* Défilement automatique */
-    var timer = null, userPaused = false, hovered = false, focused = false, onScreen = false;
+    var timer = null, hovered = false, focused = false, onScreen = false;
     function stop() { clearInterval(timer); timer = null; }
     function restart() {
       stop();
-      if (reduceMotion || userPaused || hovered || focused || !onScreen || document.hidden) return;
+      if (reduceMotion || hovered || focused || !onScreen || document.hidden) return;
       timer = setInterval(function () { step(1); }, DELAY);
-    }
-
-    if (reduceMotion) {
-      pauseBtn.hidden = true;
-    } else {
-      pauseBtn.addEventListener("click", function () {
-        userPaused = !userPaused;
-        carousel.classList.toggle("is-paused", userPaused);
-        pauseBtn.setAttribute("aria-label", userPaused ? "Reprendre le défilement automatique" : "Mettre en pause le défilement automatique");
-        restart();
-      });
     }
     carousel.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { hovered = true; stop(); } });
     carousel.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { hovered = false; restart(); } });
