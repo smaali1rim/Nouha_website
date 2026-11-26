@@ -335,10 +335,10 @@
       restart();
     });
 
-    /* Glisser au doigt (le défilement vertical de la page reste libre) */
+    /* Glisser au doigt ou à la souris (le défilement vertical de la page reste libre) */
     var startX = null, startY = 0, dx = 0, dragging = false;
     viewport.addEventListener("pointerdown", function (e) {
-      if (e.pointerType === "mouse") return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
       recenter();
       startX = e.clientX;
       startY = e.clientY;
@@ -373,6 +373,23 @@
     }
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
+    viewport.addEventListener("dragstart", function (e) { e.preventDefault(); }); // pas de glisser natif des images
+
+    /* Trackpad (glisser à deux doigts) ou Maj + molette : une carte par geste */
+    var wheelSum = 0, wheelLock = 0, wheelReset = null;
+    viewport.addEventListener("wheel", function (e) {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return; // défilement vertical : on laisse la page défiler
+      e.preventDefault();
+      clearTimeout(wheelReset);
+      wheelReset = setTimeout(function () { wheelSum = 0; }, 200);
+      if (Date.now() < wheelLock) return;
+      wheelSum += e.deltaX * (e.deltaMode === 1 ? 16 : 1); // Firefox compte en lignes
+      if (Math.abs(wheelSum) < 40) return;
+      step(wheelSum > 0 ? 1 : -1);
+      restart();
+      wheelSum = 0;
+      wheelLock = Date.now() + 650;
+    }, { passive: false });
 
     /* Défilement automatique */
     var timer = null, hovered = false, focused = false, onScreen = false;

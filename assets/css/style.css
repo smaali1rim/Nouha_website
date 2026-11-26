@@ -1025,7 +1025,10 @@ section[id] { scroll-margin-top: 24px; }
   transition: transform 0.7s var(--ease);
   cursor: pointer;
 }
-.carousel.is-ready .carousel__slide.is-active { cursor: auto; }
+.carousel.is-ready .carousel__viewport { cursor: grab; user-select: none; -webkit-user-select: none; }
+.carousel.is-ready .carousel__slide.is-active { cursor: grab; }
+.carousel.is-dragging .carousel__viewport,
+.carousel.is-dragging .carousel__slide { cursor: grabbing; }
 /* cartes de côté estompées : on atténue le contenu, la carte reste opaque
    (le trait de fond ne doit pas apparaître à travers) */
 .carousel.is-ready .carousel__slide > .v-obj > * { transition: opacity 0.7s var(--ease); }

@@ -41,7 +41,7 @@ Les couleurs sont définies en variables CSS en haut de `assets/css/style.css`
 - **Carrousel des avis** (« Leurs retours sur mon travail ») façon « coverflow » :
   la carte du centre est mise en avant, ses voisines sont réduites et coupées par
   les bords de l'écran. Flèches, points, clic sur une carte de côté, glisser au
-  doigt, flèches du clavier ; défilement automatique toutes les 6 s en boucle
+  doigt ou à la souris, trackpad (deux doigts), flèches du clavier ; défilement automatique toutes les 6 s en boucle
   (pause au survol, au clavier et hors écran). Pour ajouter un avis : copie un
   bloc `.carousel__slide` dans `index.html` et mets à jour les `aria-label`
   (« 1 sur 6 »…) — les points se créent tout seuls.
