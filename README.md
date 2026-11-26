@@ -38,6 +38,12 @@ Les couleurs sont définies en variables CSS en haut de `assets/css/style.css`
 
 - **Tous les boutons « Parlons de ton média » / « Prendre rendez-vous »** pointent
   vers `#rendez-vous` : scroll fluide jusqu'au Calendly intégré, sans quitter le site.
+- **Carrousel des avis** (« Leurs retours sur mon travail ») : 3 avis visibles sur
+  ordinateur, 2 sur tablette, 1 sur mobile ; flèches, points, glisser au doigt,
+  flèches du clavier, défilement automatique toutes les 6 s en boucle (pause au
+  survol, au clavier, hors écran, ou avec le bouton pause). Pour ajouter un avis :
+  copie un bloc `.carousel__slide` dans `index.html` et mets à jour son
+  `aria-label` (« 6 sur 6 »…) — les points se créent tout seuls.
 - **Menu burger** plein écran (Échap pour fermer, navigation clavier).
 - **Apparitions au scroll** : le contenu reste visible par défaut. La classe
   `reveal-ready` n'active les animations qu'une fois l'observateur initialisé ;

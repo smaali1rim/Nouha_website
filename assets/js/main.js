@@ -213,6 +213,187 @@
   }
 
   /* ------------------------------------------------------------------
+     Carrousel des avis
+     Boucle infinie : les avis sont recopiés avant et après la rangée, et
+     on revient en douce sur les vrais avis à la fin de chaque glissement.
+     Flèches, points, clavier, glisser au doigt, défilement automatique
+     (en pause au survol, au focus, hors écran, onglet caché ou sur demande).
+     ------------------------------------------------------------------ */
+  document.querySelectorAll("[data-carousel]").forEach(function (carousel) {
+    var viewport = carousel.querySelector(".carousel__viewport");
+    var track = carousel.querySelector(".carousel__track");
+    var controls = carousel.querySelector(".carousel__controls");
+    var dotsWrap = carousel.querySelector(".carousel__dots");
+    var pauseBtn = carousel.querySelector(".carousel__btn--pause");
+    var slides = Array.prototype.slice.call(track.children);
+    var n = slides.length;
+    var DELAY = 6000;
+    if (n < 2) return;
+
+    function copy(slide) {
+      var c = slide.cloneNode(true);
+      ["role", "aria-roledescription", "aria-label"].forEach(function (a) { c.removeAttribute(a); });
+      c.setAttribute("aria-hidden", "true");
+      c.setAttribute("inert", "");
+      c.querySelectorAll("[id]").forEach(function (el) { el.removeAttribute("id"); });
+      c.querySelectorAll("[aria-labelledby]").forEach(function (el) { el.removeAttribute("aria-labelledby"); });
+      return c;
+    }
+    slides.forEach(function (s) { track.appendChild(copy(s)); });
+    slides.slice().reverse().forEach(function (s) { track.insertBefore(copy(s), track.firstChild); });
+
+    var all = track.children;   // [copies][vrais avis][copies]
+    var pos = n;                // première carte visible (index dans `all`)
+
+    var dots = slides.map(function (s, k) {
+      var d = document.createElement("button");
+      d.type = "button";
+      d.className = "carousel__dot";
+      d.setAttribute("aria-label", "Avis " + (k + 1) + " sur " + n);
+      d.addEventListener("click", function () {
+        // vers la copie de cet avis la plus proche, pour glisser le moins possible
+        var target = [k, n + k, 2 * n + k].reduce(function (a, b) { return Math.abs(b - pos) < Math.abs(a - pos) ? b : a; });
+        goTo(target);
+        restart();
+      });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+    controls.hidden = false;
+    carousel.classList.add("is-ready");
+
+    function render(animate) {
+      track.classList.toggle("no-anim", !animate);
+      track.style.transform = "translate3d(" + -(all[pos].offsetLeft - all[0].offsetLeft) + "px,0,0)";
+      if (!animate) void track.offsetWidth; // applique la position avant de réactiver l'animation
+      var cur = (pos % n + n) % n;
+      dots.forEach(function (d, k) {
+        if (k === cur) d.setAttribute("aria-current", "true");
+        else d.removeAttribute("aria-current");
+      });
+    }
+
+    // revient sur les vrais avis (même carte affichée, sans animation)
+    function recenter() {
+      if (pos >= n && pos < 2 * n) return;
+      pos = (pos % n + n) % n + n;
+      render(false);
+    }
+
+    function goTo(p) {
+      pos = p;
+      render(!reduceMotion);
+      if (reduceMotion) recenter();
+    }
+
+    function step(dir) {
+      if (pos + dir < 0 || pos + dir >= all.length) recenter();
+      goTo(pos + dir);
+    }
+
+    track.addEventListener("transitionend", function (e) {
+      if (e.target === track && e.propertyName === "transform") recenter();
+    });
+
+    carousel.querySelector(".carousel__btn--prev").addEventListener("click", function () { step(-1); restart(); });
+    carousel.querySelector(".carousel__btn--next").addEventListener("click", function () { step(1); restart(); });
+    carousel.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { step(-1); restart(); e.preventDefault(); }
+      if (e.key === "ArrowRight") { step(1); restart(); e.preventDefault(); }
+    });
+
+    /* Glisser au doigt (le défilement vertical de la page reste libre) */
+    var startX = null, startY = 0, dx = 0, dragging = false;
+    viewport.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse") return;
+      recenter();
+      startX = e.clientX;
+      startY = e.clientY;
+      dx = 0;
+      dragging = false;
+    });
+    viewport.addEventListener("pointermove", function (e) {
+      if (startX === null) return;
+      dx = e.clientX - startX;
+      if (!dragging) {
+        if (Math.abs(dx) < 8) return;
+        if (Math.abs(e.clientY - startY) > Math.abs(dx)) { startX = null; return; }
+        dragging = true;
+        carousel.classList.add("is-dragging");
+        try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+        stop();
+      }
+      track.style.transform = "translate3d(" + (dx - (all[pos].offsetLeft - all[0].offsetLeft)) + "px,0,0)";
+    });
+    function endDrag() {
+      if (startX === null) return;
+      startX = null;
+      if (!dragging) return;
+      dragging = false;
+      carousel.classList.remove("is-dragging");
+      var width = all[1].offsetLeft - all[0].offsetLeft;
+      var moved = Math.round(-dx / width);
+      if (!moved && Math.abs(dx) > 40) moved = dx < 0 ? 1 : -1;
+      goTo(Math.max(0, Math.min(all.length - 1, pos + moved)));
+      restart();
+    }
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
+
+    /* Défilement automatique */
+    var timer = null, userPaused = false, hovered = false, focused = false, onScreen = false;
+    function stop() { clearInterval(timer); timer = null; }
+    function restart() {
+      stop();
+      if (reduceMotion || userPaused || hovered || focused || !onScreen || document.hidden) return;
+      timer = setInterval(function () { step(1); }, DELAY);
+    }
+
+    if (reduceMotion) {
+      pauseBtn.hidden = true;
+    } else {
+      pauseBtn.addEventListener("click", function () {
+        userPaused = !userPaused;
+        carousel.classList.toggle("is-paused", userPaused);
+        pauseBtn.setAttribute("aria-label", userPaused ? "Reprendre le défilement automatique" : "Mettre en pause le défilement automatique");
+        restart();
+      });
+    }
+    carousel.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { hovered = true; stop(); } });
+    carousel.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { hovered = false; restart(); } });
+    // pause quand on navigue au clavier dans le carrousel (pas après un simple clic)
+    carousel.addEventListener("focusin", function (e) {
+      var kb = true;
+      try { kb = e.target.matches(":focus-visible"); } catch (err) {}
+      if (!kb) return;
+      focused = true;
+      stop();
+    });
+    carousel.addEventListener("focusout", function (e) {
+      if (carousel.contains(e.relatedTarget)) return;
+      focused = false;
+      restart();
+    });
+    document.addEventListener("visibilitychange", restart);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        restart();
+      }, { threshold: 0.35 }).observe(carousel);
+    } else {
+      onScreen = true;
+    }
+
+    // la largeur des cartes change avec l'écran : on recale la rangée
+    var refresh = function () { recenter(); render(false); };
+    window.addEventListener("resize", refresh);
+    window.addEventListener("load", refresh);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+    render(false);
+    restart();
+  });
+
+  /* ------------------------------------------------------------------
      Trait fin qui traverse tout le site (home)
      Le hero garde sa ligne d'origine (#hero-thread). Le trait reprend là
      où elle s'arrête et descend jusqu'en bas en balayant la page.
