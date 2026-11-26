@@ -11,6 +11,7 @@ Site vitrine statique (HTML / CSS / JavaScript, sans dépendance ni build).
 | `accompagnement-transformer.html` | Page détaillée « Transformer ton média » (+ son propre Calendly) |
 | `a-propos.html` | Page « Un peu plus sur moi » (+ Calendly) |
 | `mentions-legales.html` | Mentions légales |
+| `politique-confidentialite.html` | Données personnelles, prestataires, cookies et exercice des droits |
 
 ## Voir le site en local
 
@@ -38,6 +39,9 @@ Les couleurs sont définies en variables CSS en haut de `assets/css/style.css`
 - **Tous les boutons « Parlons de ton média » / « Prendre rendez-vous »** pointent
   vers `#rendez-vous` : scroll fluide jusqu'au Calendly intégré, sans quitter le site.
 - **Menu burger** plein écran (Échap pour fermer, navigation clavier).
+- **Apparitions au scroll** : le contenu reste visible par défaut. La classe
+  `reveal-ready` n'active les animations qu'une fois l'observateur initialisé ;
+  un script absent ou une initialisation défaillante ne masque pas les textes.
 - **Calendly** : iframe directe (sans `widget.js`), chargée à l'approche de la
   section ; sa hauteur suit celle de la page Calendly (message
   `calendly.page_height`), donc pas de vide ni de défilement interne. URL à
@@ -67,4 +71,20 @@ assets/
 ```
 
 Les menus, en-têtes et pieds de page sont dupliqués dans chaque fichier HTML :
-une modification de navigation est à reporter sur les 5 pages.
+une modification de navigation est à reporter sur toutes les pages concernées.
+
+## SEO et mise en ligne
+
+- Domaine de référence : `https://nouhasmaali.com`, avec `/` comme URL de la home.
+  Chaque page possède une URL canonique et des métadonnées Open Graph / Twitter.
+- L'image de partage est `assets/img/poster-2.webp` (1408 × 736). Si le domaine ou
+  l'image change, mettre à jour les URL absolues dans les métadonnées des pages.
+- Publier aussi `sitemap.xml` et `robots.txt` à la racine du site. Ajouter chaque
+  nouvelle page publique au sitemap avec son URL canonique.
+- Après déploiement, vérifier les réponses HTTP, les redirections HTTPS / www,
+  la compression et le cache chez l'hébergeur, puis soumettre le sitemap dans
+  Google Search Console et mesurer les Core Web Vitals sur le site en ligne.
+- La politique de confidentialité décrit les services visibles dans le code.
+  Les réglages de conservation d'Analytics, les garanties contractuelles des
+  prestataires et les pratiques de conservation des échanges sont à tenir à jour
+  dans les comptes concernés et dans cette politique.

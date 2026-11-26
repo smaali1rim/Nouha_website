@@ -60,9 +60,9 @@
     banner.setAttribute("aria-label", "Gestion des cookies");
     banner.innerHTML =
       '<p class="cookie-banner__title">Un petit cookie&nbsp;?</p>' +
-      '<p class="cookie-banner__text">J\'utilise Google Analytics pour savoir combien de personnes visitent le site et ce qui les intéresse, ' +
-      'uniquement si tu es d\'accord. Tu peux changer d\'avis à tout moment via « Gérer les cookies » en bas de page. ' +
-      '<a href="mentions-legales.html#legal-cookies">En savoir plus</a></p>' +
+      '<p class="cookie-banner__text">J\'utilise Google Analytics pour savoir combien de personnes visitent mon site et quelles pages sont consultées. Mais seulement si tu es d\'accord ! ' +
+      'Tu peux changer d\'avis à tout moment en cliquant sur « Gérer les cookies » en bas de page. ' +
+      '<a href="politique-confidentialite.html#privacy-cookies">En savoir plus</a></p>' +
       '<div class="cookie-banner__actions">' +
       '<button type="button" class="cookie-banner__btn" data-consent="denied">Refuser</button>' +
       '<button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-consent="granted">Accepter</button>' +
